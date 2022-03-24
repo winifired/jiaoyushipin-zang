@@ -1,0 +1,87 @@
+    .fixedbottom2 {
+        // bottom: 30px;
+        margin: 50px 0 0;
+        img {
+            margin: 0 8px 0 0;
+        }
+    }
+    
+    button {
+        background: none;
+        border: none;
+    }
+    
+    .login {
+        padding: 94px 24px 0;
+        .f40 {
+            margin: 0 0 29px;
+        }
+        .elesItem {
+            margin: 11px 0 0;
+        }
+        &-input {
+            padding: 34px 0 14px;
+            border-bottom: 1px solid #e6e6e6;
+            .imgW {
+                padding-right: 15px;
+                position: relative;
+            }
+            input {
+                padding: 0 15px;
+                flex: 1;
+            }
+            .imgW:after {
+                position: absolute;
+                content: "";
+                width: 1px;
+                height: 12px;
+                opacity: 0.4;
+                background: #aaa;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .login-button {
+            width: 327px;
+            height: 44px;
+            line-height: 44px;
+            background: #f9dc39;
+            border-radius: 22px;
+            margin: 68px 0 12px;
+            text-align: center;
+        }
+        .register {
+            text-align: center;
+        }
+    }
+    
+    .getCode {
+        color: #ffa000;
+        padding: 0 0 0 8px;
+        position: relative;
+    }
+    
+    .getCode:after {
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 12px;
+        opacity: 0.4;
+        background: #aaa;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .register {
+        padding-top: 0!important;
+    }
+    
+    .register-btn {
+        margin-top: 79px!important;
+    }
+    
+    .nowarp {
+        flex-wrap: nowrap!important;
+    }

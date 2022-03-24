@@ -1,0 +1,68 @@
+<template>
+    <div class="list">
+        <div
+            class="flex row-center item"
+            v-for="(item,index) in state.array"
+            :key="index"
+            @click="$router.push('/detail/'+item.id)"
+        >
+            <van-image radius="5" :src="item.cover" class="image" />
+            <div class="content">
+                <div class="f30 c333 Qomolangma title">{{item.name||''}}</div>
+                <!-- 公司名 -->
+                <div class="f26 c777 Qomolangma companyName">ཏི་སེའི་དྲ་མིག</div>
+                <div class="flex area-between price">
+                    <p class="FZLTTHJW f24 c777 flex row-center" v-if="item.learnTime>=0">
+                        <img src="../assets/eye-icon.png" alt class="icon30" />{{item.learnTime>999?'999+':item.learnTime}}
+                    </p>
+                    <p class="Qomolangma f32 cff5" v-if="item.mode == 1">རིན་མེད།</p>
+                    <p class="FZLTTHJWBOLD f28 cff5" v-else>
+                        <span class="f24">￥</span>{{item.price||0}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { defineProps, reactive, watch } from "vue";
+const props = defineProps({
+    type: [String, Number],
+    list: Array,
+})
+const state=reactive({
+    array:[]
+})
+watch(() => props.list, (newData) => {
+    state.array=newData;
+})
+</script>
+
+<style scoped lang='scss'>
+.list {
+    .item {
+        .image {
+            width: 120px;
+            height: 80px;
+            border-radius: 5px;
+            margin-right: 16px;
+        }
+        .content {
+            flex: 1;
+            .companyName {
+                margin: 8px 0 0;
+            }
+            .price {
+                margin: 4px 0 0;
+                img {
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+    .item:not(:last-child) {
+        margin-bottom: 12px;
+    }
+}
+</style>

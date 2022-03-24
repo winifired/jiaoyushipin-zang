@@ -1,0 +1,209 @@
+<template>
+  <div class="index">
+    <div class="swper-search">
+      <div class="search flex area-between">
+        <!-- <img src="../assets/logo.png" alt="" class="logo"> -->
+        <p style="width: 8vw;height: 8vw;background: #fff;text-align: center;border-radius: 50%;padding-top: 1.2vw;margin-right: 3.5vw;" @click="$t('lang.language')=='汉'?(this.$i18n.locale = 'zh'):(this.$i18n.locale = 'zangwen')">{{$t('lang.language')}}</p>
+        <div class="flex row-center search-input" @click="$router.push('/search')">
+          <img src="../assets/search-icon.png" alt class="icon40" />
+          <input
+            type="text"
+            readonly
+            value="ཉིད་ཀྱི་བལྟ་འདོད་པའི་སློབ་ཁྲིད་འཚོལ་བ།"
+            class="f26 caaa Qomolangma"
+          />
+        </div>
+        <Badge :content="state.unReadNum" max="99" :show-zero="false">
+          <img
+            src="../assets/msg-icon.png"
+            alt
+            class="icon44"
+            @click="$store.state.userid ? $router.push('/systemMsg') : $router.push('/login')"
+          />
+        </Badge>
+      </div>
+      <Swipe class="my-swipe" :show-indicators="false" :loop="true" :autoplay="3000">
+        <SwipeItem v-for="item in state.swiper" :key="item.id">
+          <img :src="item.picture" alt />
+        </SwipeItem>
+      </Swipe>
+      <div class="flex claassify">
+        <div v-for="(item,index) in state.typeList" :key="index" @click="toSearch(item)">
+          <img :src="item.icon" alt class="icon84" />
+          <p class="f28 c333 Qomolangma">{{ item.name }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="index-list">
+      <!-- 精选课程 -->
+      <div class="navigator flex area-between">
+        <p class="f34 c333 Qomolangma flex row-center">
+          <span class="line"></span> {{$t('home.selected')}}
+        </p>
+        <div class="flex row-center" @click="$router.push({path:'/search',query:{type:'2'}})">
+          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+          <img src="../assets/right-icon.png" alt class="icon40" />
+        </div>
+      </div>
+      <listshow :list="state.listPayCourse"></listshow>
+    </div>
+    <div class="index-list">
+      <!-- 最新课程 -->
+      <div class="navigator flex area-between">
+        <p class="f34 c333 Qomolangma flex row-center">
+          <span class="line"></span>{{$t('home.newest')}}
+        </p>
+        <div class="flex row-center" @click="$router.push({path:'/search'})">
+          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+          <img src="../assets/right-icon.png" alt class="icon40" />
+        </div>
+      </div>
+      <listshow :list="state.listNewstCourse"></listshow>
+    </div>
+    <div class="index-list">
+      <!-- 免费课程 -->
+      <div class="navigator flex area-between">
+        <p class="f34 c333 Qomolangma flex row-center">
+          <span class="line"></span>{{$t('home.free')}}
+        </p>
+        <div class="flex row-center" @click="$router.push({path:'/search',query:{type:'1'}})">
+          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+          <img src="../assets/right-icon.png" alt class="icon40" />
+        </div>
+      </div>
+      <listshow :list="state.listFreeCourse"></listshow>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { Badge, Swipe, SwipeItem } from 'vant';
+import listshow from "@/components/list.vue";
+import { getCurrentInstance, reactive } from 'vue';
+import { useStore } from 'vuex';
+import { getwxConfig } from "../utils/wxJs.js";
+getwxConfig();
+const { proxy } = getCurrentInstance();
+const store = useStore();
+// 消息未读数量
+store.dispatch('getUnReadNum');
+const state = reactive({
+  swiper: [],
+  unReadNum: store.state.UnReadNum,
+  typeList: [],
+  listPayCourse: [],
+  listNewstCourse: [],
+  listFreeCourse: [],
+});
+proxy.$post(proxy.Apis.selectJyspCarouselList).then(res => {
+  state.swiper = res.data;
+});
+proxy.$post(proxy.Apis.selectJyspCourseTypeList).then(res => {
+  state.typeList = res.data;
+});
+let data = {
+  isRecommend: 1,//是否推荐：1推荐，0不推荐
+  pageNum: 1,
+  pageSize: 6
+};
+proxy.$post(proxy.Apis.listPayCourse, data).then(res => {
+  state.listPayCourse = res.data.rows;
+  console.log(state.listPayCourse)
+});
+proxy.$post(proxy.Apis.listNewstCourse, data).then(res => {
+  state.listNewstCourse = res.data;
+});
+proxy.$post(proxy.Apis.listFreeCourse, data).then(res => {
+  state.listFreeCourse = res.data.rows;
+});
+function toSearch(item) {
+  proxy.$router.push({
+    path: '/search',
+    query: {
+      typeMsg: JSON.stringify({ name: item.name, id: item.id })
+    }
+  })
+}
+</script>
+
+<style scoped lang='scss'>
+.logo{
+  width:18px;
+  height:26px;
+  margin-right:10px;
+}
+.index-list {
+  background: #fff;
+  padding: 16px;
+  margin: 8px 0 0;
+  .navigator {
+    margin: 0 0 12px;
+    .line {
+      display: block;
+      width: 4px;
+      height: 12px;
+      background: #f9dc39;
+      margin-right: 12px;
+    }
+    > div {
+      > p {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+.claassify {
+  padding: 12px 0 0.01px;
+  > div {
+    width: 25%;
+    margin: 0 0 9px;
+    > img {
+      border-radius: 50%;
+      margin: 0 auto 5px;
+    }
+    > p {
+      text-align: center;
+    }
+  }
+}
+.index {
+  min-height: 100vh;
+  background: #f8f8f8;
+  padding: 0 0 24px;
+}
+.swper-search {
+  min-height: 160px;
+  background: url(../assets/index_bg.png) no-repeat;
+  background-size: 100% 160px;
+  background-color: #ffffff;
+  .my-swipe {
+    .van-swipe-item {
+      height: 148px;
+
+      img {
+        width: 343px;
+        height: 148px;
+        margin:0 auto;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+.search {
+  padding: 8px 16px;
+  &-input {
+    flex:1;
+    margin-right: 16px;
+    height: 32px;
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 0 12px;
+    img {
+      margin-right: 12px;
+    }
+    input {
+      flex: 1;
+    }
+  }
+}
+</style>
