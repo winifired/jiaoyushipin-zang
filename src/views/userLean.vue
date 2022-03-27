@@ -6,12 +6,12 @@
                     :class="actived == 1 ? 'actived' : ''"
                     class="c777 f32 Qomolangma"
                     @click="actived = 1"
-                >རིན་མེད་སློབ་ཁྲིད།</p>
+                >{{$t('home.free')}}</p>
                 <p
                     :class="actived == 2 ? 'actived' : ''"
                     class="c777 f32 Qomolangma"
                     @click="actived = 2"
-                >རིན་སྤྲད་ཟིན་པའི་སློབ་ཁྲིད།</p>
+                >{{$t('huiyuankecheng')}}</p>
             </div>
         </div>
         <div class="list">
@@ -26,12 +26,12 @@
                     <div class="content">
                         <div class="f30 c333 Qomolangma title">{{item.name}}</div>
                         <div class="f22 c777 Qomolangma companyName" v-if="item.createTime">
-                            ཐེངས་སྔོན་མའི་སློབ་སྦྱོང་དུས་ཚོད།
+                            {{$t('shangcixuexi')}}
                             <span>{{item.createTime.slice(0,10).replace(/-/g,'.')}}</span>
                         </div>
                         <div class="flex area-between price">
-                            <p class="Qomolangma f22 c777 flex row-center">ཏི་སེའི་དྲ་མིག</p>
-                            <div class="confirm f24 c333 Qomolangma">སློབ་སྦྱོང་བྱེད་པ།</div>
+                            <p class="Qomolangma f22 c777 flex row-center">{{$t('appname')}}</p>
+                            <div class="confirm f24 c333 Qomolangma">{{$t('jixuxuexi')}}</div>
                         </div>
                     </div>
                 </div>
@@ -44,6 +44,7 @@
 import { defineComponent, getCurrentInstance, reactive, toRefs, watch } from 'vue';
 import { List } from 'vant';
 import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'userLean',
     props: {
@@ -52,6 +53,8 @@ export default defineComponent({
         vanList: List
     },
     setup() {
+        const {t,locale}=useI18n();
+        document.title=t('xxjl');
         const { proxy } = getCurrentInstance();
         const store = useStore();
         const state = reactive({

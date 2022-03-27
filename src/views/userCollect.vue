@@ -23,9 +23,9 @@
                 />
                 <van-image radius="5" :src="item.cover" class="image" />
                 <div class="content">
-                    <div class="f30 c333 Qomolangma title">{{ item.name }}</div>
+                    <div class="f30 c333 Qomolangma title">{{ lang=='zh'?item.name:item.nameTibetan }}</div>
                     <!-- 公司名 -->
-                    <div class="f26 c777 Qomolangma companyName">ཏི་སེའི་དྲ་མིག</div>
+                    <div class="f26 c777 Qomolangma companyName">{{$t('appname')}}</div>
                     <div class="flex area-between price">
                         <p class="FZLTTHJW f24 c777 flex row-center">
                             <img src="../assets/eye-icon.png" alt class="icon30" />
@@ -46,13 +46,13 @@
                 @click.stop="toggleAll"
             />
             <img src="../assets/choose.png" alt class="icon48" v-else @click.stop="toggleAll" />
-            ཚང་མ།
+            {{$t('all')}}
         </p>
         <div
             class="confirm Qomolangma f32 c333"
             :class="{ 'noClick': noClick }"
             @click="confirm"
-        >ཉར་ཚགས་ལས་ཕྱིར་འཐེན།</div>
+        >{{$t('quxiaoshoucang')}}</div>
     </div>
 </template>
 
@@ -60,6 +60,7 @@
 import { defineComponent, getCurrentInstance, reactive, toRefs, watch } from 'vue'
 import { useStore } from 'vuex';
 import { List } from 'vant';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'userCollect',
     props: {
@@ -68,6 +69,8 @@ export default defineComponent({
         vanList: List
     },
     setup() {
+        const {t,locale}=useI18n();
+        document.title=t('users.mycollection');
         console.log(window.innerHeight)
         const { proxy } = getCurrentInstance();
         const store = useStore();
@@ -78,7 +81,8 @@ export default defineComponent({
             loading: false,
             finished: false,
             checkedAll: false,
-            noClick: true
+            noClick: true,
+            lang:locale.value
         });
         watch(() => state.listCourse, (newData) => {
             let isChecked = newData.find((item) => !item.checked);
@@ -144,7 +148,7 @@ export default defineComponent({
                 collectIds: arr.join(','),
             }).then(res => {
                 if (res.code == 0) {
-                    proxy.$toast(res.msg);
+                    proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     state.pageNum=1;
                     getData();
                     state.checkedAll=false;

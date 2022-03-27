@@ -1,7 +1,7 @@
 <template>
     <div class="userMsg" v-if="userinfo">
         <div class="flex area-between item marginb8 itemelse">
-            <p class="f28 c333 Qomolangma">མགོ་པར།</p>
+            <p class="f28 c333 Qomolangma">{{$t('touxiang')}}</p>
             <div class="flex row-center">
                 <van-uploader :after-read="afterRead" accept="image/*">
                     <img :src="avatar" alt class="avatar" v-if="avatar" />
@@ -12,7 +12,7 @@
         </div>
         <div class="flex area-between item">
             <!-- 昵称 -->
-            <p class="f28 c333 Qomolangma">མིང་།</p>
+            <p class="f28 c333 Qomolangma">{{$t('nicheng')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
@@ -25,20 +25,20 @@
         </div>
         <div class="flex area-between item">
             <!-- 微信 -->
-            <p class="f28 c333 Qomolangma">སྐད་འཕྲིན།</p>
+            <p class="f28 c333 Qomolangma">{{$t('weixin')}}</p>
             <div class="flex row-center msg" @click="bindWeChat">
                 <input
                     type="text"
                     class="f28 caaa"
                     readonly
-                    :value="userinfo.openid ? 'སྦྲེལ་ཟིན་པ།' : 'སྦྲེལ་རོགས།'"
+                    :value="userinfo.openid ? $t('yibangding') : $t('weibangding')"
                 />
                 <img src="../assets/usermsg-right.png" alt class="icon36" />
             </div>
         </div>
         <div class="flex area-between item">
             <!-- qq -->
-            <p class="f28 c333 Qomolangma">གླེང་མོལ་ཨང་གྲངས།</p>
+            <p class="f28 c333 Qomolangma">{{$t('qq')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
@@ -51,7 +51,7 @@
         </div>
         <div class="flex area-between item">
             <!-- 职业 -->
-            <p class="f28 c333 Qomolangma">ལས་རིགས།</p>
+            <p class="f28 c333 Qomolangma">{{$t('zhiye')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
@@ -64,7 +64,7 @@
         </div>
         <div class="flex area-between item" @click="$router.push('/editphone')">
             <!-- 手机号 -->
-            <p class="f28 c333 Qomolangma">ཁ་པར་ཨང་གྲངས་སྦྲེལ་བ།</p>
+            <p class="f28 c333 Qomolangma">{{$t('bangdingshoujihao')}}</p>
             <div class="flex row-center msg">
                 <p class="f28 caaa">{{ userinfo.phoneNumber }}</p>
                 <img src="../assets/usermsg-right.png" alt class="icon36" />
@@ -78,6 +78,7 @@ import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue';
 import { Uploader } from 'vant';
 import { useStore } from 'vuex';
 import { bindwx, getCode } from "../utils/wxJs.js";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'userMsg',
     props: {
@@ -87,6 +88,8 @@ export default defineComponent({
     },
     setup() {
         getCode();
+        const { t,locale } = useI18n();
+        document.title=t('zlsz');
         const store = useStore();
         console.log(store)
         const state = reactive({
@@ -108,7 +111,7 @@ export default defineComponent({
             data['id'] = store.state.userid;
             proxy.$post(proxy.Apis.updateJyspUser, data).then(res => {
                 if (res.code == 0) {
-                    proxy.$toast(res.msg);
+                    proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     if (type == 1) {
                         state.avatar = state.userinfo.avatar = data.avatar;
                     } else if (type == 2) {

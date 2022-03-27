@@ -1,6 +1,6 @@
 <template>
     <div class="login" :style="{ height: focusStatus ? innerHeight : '100vh' }">
-        <div class="f40 c333 Qomolangma">{{$t('login.title')}}</div>
+        <div class="f40 c333 Qomolangma">{{ $t('login.title') }}</div>
         <div class="flex row-center login-input">
             <div class="imgW">
                 <img src="../assets/user-icon.png" alt class="icon40" />
@@ -17,7 +17,7 @@
         <div class="flex row-center login-input nowarp">
             <input
                 type="text"
-                :placeholder="$t('login.phoneplace')"
+                :placeholder="$t('login.yanzheng')"
                 class="f30 Qomolangma"
                 style="padding:0;"
                 v-model="codeVal"
@@ -31,17 +31,13 @@
             >{{ codeName }}</button>
         </div>
         <div class="flex area-between elesItem">
-            <router-link
-                to="/login"
-                replace
-                class="Qomolangma f24 c333"
-            >ར་སྤྲོད་ཨང་ཀིས་ཐོ་འགོད་བྱེད་པ།</router-link>
-            <router-link to="/resetPass" class="Qomolangma f24 c333">སྒྲིག་འགོད། གསང་ཨང་བརྗེ་བ།</router-link>
+            <router-link to="/login" replace class="Qomolangma f24 c333">{{ $t('login.milogin') }}</router-link>
+            <router-link to="/resetPass" class="Qomolangma f24 c333">{{ $t('login.setpass') }}</router-link>
         </div>
-        <div class="login-button f32 c333 Qomolangma" @click="login">ཐོ་འགོད།</div>
+        <div class="login-button f32 c333 Qomolangma" @click="login">{{ $t('login.login') }}</div>
         <div class="f26 c777 Qomolangma register flex area-center">
-            མིག་སྔར་རྩིས་ཐོའི་ཨང་གྲངས་མི་འདུག་པས།
-            <router-link to="/register" class="c295">འཕྲལ་མར་ཐོ་འགོད་བྱེད་རོགས།</router-link>
+            {{ $t('login.noacount') }}
+            <router-link to="/register" class="c295">{{ $t('login.goregister') }}</router-link>
         </div>
         <div
             class="fixedbottom2 flex area-center f24 c777 Qomolangma"
@@ -50,9 +46,10 @@
         >
             <img src="../assets/check-icon.png" alt v-if="!checkStatus" class="icon44" />
             <img src="../assets/checked-icon.png" alt v-else class="icon44" />
-            མོས་མཐུན་
-            <router-link to="/asidePage/1" class="c295">《སྤྱོད་མཁན་གྱི་གྲོས་མཐུན།》</router-link>དང
-            <router-link to="/asidePage/2" class="c295">《གསང་བའི་གྲོས་མཐུན།》</router-link>
+            {{ $t('login.agree') }}
+            <router-link to="/asidePage/1" class="c295">《{{ $t('login.useragree') }}》</router-link>
+            {{ $t('login.he') }}
+            <router-link to="/asidePage/2" class="c295">《{{ $t('login.yinsi') }}》</router-link>
         </div>
     </div>
 </template>
@@ -62,7 +59,7 @@ import { getCurrentInstance, onActivated, reactive, ref, toRefs } from '@vue/run
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { phone } from '../utils/check.js';
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 export default {
     name: 'loginCode',
     setup() {
@@ -74,9 +71,10 @@ export default {
             codeVal: '',
             timer: null
         });
-        const { t } = useI18n();
+        const { t,locale } = useI18n();
+        document.title = t('dl');
         const { proxy } = getCurrentInstance();
-        state.codeName=t('login.getyan');
+        state.codeName = t('login.getyan');
         console.log(proxy)
         const router = useRouter();
         const store = useStore();
@@ -111,7 +109,7 @@ export default {
                         state.disabled = false;
                         clearInterval(state.timer)
                     } else {
-                        proxy.$toast(res.msg)
+                        proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     }
                 })
             }
@@ -119,11 +117,11 @@ export default {
         function login() {
             if (phone(state.phoneVal)) {
                 if (!state.codeVal) {
-                    proxy.$toast.fail('ཉིད་ཀྱིས་ར་སྤྲོད་ཨང་གྲངས་འགོད་རོགས།');
+                    proxy.$toast.fail(t('login.yanzheng'));
                     return;
                 }
                 if (!state.checkStatus) {
-                    proxy.$toast.fail('མོས་མཐུན་《སྤྱོད་མཁན་གྱི་གྲོས་མཐུན།》དང《གསང་བའི་གྲོས་མཐུན།》');
+                    proxy.$toast.fail(t('login.tongyi'));
                     return;
                 }
                 proxy.$post(proxy.Apis.verificationCodeLogin, {
@@ -135,7 +133,7 @@ export default {
                         state.disabled = false;
                         clearInterval(state.timer)
                     } else {
-                        proxy.$toast('ཐོ་འགོད་ལེགས་འགྲུབ་བྱུང་བ།');
+                        proxy.$toastt('login.successlogin');
                         store.commit('setUsrid', res.data.id);
                         store.commit('setUserinfo', res.data);
                         router.replace('/');

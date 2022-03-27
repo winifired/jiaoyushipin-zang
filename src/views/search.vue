@@ -5,7 +5,7 @@
                 <img src="../assets/search-icon.png" alt class="icon40" />
                 <input
                     type="text"
-                    placeholder="ཉིད་ཀྱི་བལྟ་འདོད་པའི་སློབ་ཁྲིད་འཚོལ་བ།"
+                    :placeholder="$t('home.sou')"
                     class="f26 c333 Qomolangma"
                     v-model="searchVal"
                     @keyup.enter="confirmInput"
@@ -15,7 +15,7 @@
                 <van-dropdown-item class="dropdown-item" @open="openMeau(1)" @close="closeMeau">
                     <template #title>
                         <p class="f28 Qomolangma flex row-center">
-                            <span>སློབ་ཁྲིད་ཀྱི་རྣམ་པ།</span>
+                            <span>{{$t('kechengxingshi')}}</span>
                             <img
                                 src="../assets/up-icon.png"
                                 alt
@@ -48,7 +48,7 @@
                 <van-dropdown-item class="dropdown-item" @open="openMeau(2)" @close="closeMeau">
                     <template #title>
                         <p class="f28 Qomolangma flex row-center">
-                            རིན་གོང་།
+                            {{$t('jiage')}}
                             <img
                                 src="../assets/up-icon.png"
                                 alt
@@ -93,6 +93,7 @@ import { defineComponent, reactive, toRefs, getCurrentInstance } from 'vue';
 import { DropdownMenu, DropdownItem, List } from 'vant';
 import listshow from "@/components/list.vue"
 import { useRoute } from 'vue-router';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'search',
     props: {
@@ -101,18 +102,20 @@ export default defineComponent({
         vanDropdownMenu: DropdownMenu, vanDropdownItem: DropdownItem, listshow, vanList: List
     },
     setup() {
+        const { t } = useI18n();
+        document.title=t('ss');
         const route = useRoute();
         const options1 = [
             // 全部、单次课程、系列课程
-            { text: 'ཚང་མ།', value: '0' },
-            { text: 'སློབ་ཁྲིད་རྐྱང་བ།', value: '1' },
-            { text: 'སློབ་ཁྲིད་ཆ་ཚང་།', value: '2' },
+            { text: t('all'), value: '0' },
+            { text: t('dancikc'), value: '1' },
+            { text: t('morekecheng'), value: '2' },
         ];
         const options2 = [
             // 全部、付费、免费
-            { text: 'ཚང་མ།', value: '0' },
-            { text: 'རིན་ལྡན་སློབ་ཁྲིད།', value: '2' },
-            { text: 'རིན་མེད་སློབ་ཁྲིད།', value: '1' },
+            { text: t('all'), value: '0' },
+            { text: t('fufei'), value: '2' },
+            { text: t('tabbar.free'), value: '1' },
         ];
         function changeItem1(index) {
             state.chooseOption1 = options1[index].value;

@@ -6,16 +6,16 @@
             :key="index"
             @click="$router.push('/detail/'+item.id)"
         >
-            <van-image radius="5" :src="item.cover" class="image" />
+            <van-image radius="5" :src="item.cover" fit="cover" class="image" />
             <div class="content">
-                <div class="f30 c333 Qomolangma title">{{item.name||''}}</div>
+                <div class="f30 c333 Qomolangma title">{{state.lang=='zh'?item.name:item.nameTibetan}}</div>
                 <!-- 公司名 -->
-                <div class="f26 c777 Qomolangma companyName">ཏི་སེའི་དྲ་མིག</div>
+                <div class="f26 c777 Qomolangma companyName">{{t('appname')}}</div>
                 <div class="flex area-between price">
                     <p class="FZLTTHJW f24 c777 flex row-center" v-if="item.learnTime>=0">
                         <img src="../assets/eye-icon.png" alt class="icon30" />{{item.learnTime>999?'999+':item.learnTime}}
                     </p>
-                    <p class="Qomolangma f32 cff5" v-if="item.mode == 1">རིན་མེད།</p>
+                    <p class="Qomolangma f32 cff5" v-if="item.mode == 1">{{t('tabbar.free')}}</p>
                     <p class="FZLTTHJWBOLD f28 cff5" v-else>
                         <span class="f24">￥</span>{{item.price||0}}
                     </p>
@@ -27,12 +27,18 @@
 
 <script setup>
 import { defineProps, reactive, watch } from "vue";
+import { useI18n } from "vue-i18n";
+const {t,locale}=useI18n();
 const props = defineProps({
     type: [String, Number],
     list: Array,
 })
 const state=reactive({
-    array:[]
+    array:[],
+    lang:locale.value
+})
+watch(() => locale.value, (newData) => {
+    state.lang=newData;
 })
 watch(() => props.list, (newData) => {
     state.array=newData;

@@ -1,11 +1,11 @@
 <template>
     <div class="evas">
         <van-list v-model:loading="loading" :finished="finished" @load="getComment">
-            <div class="item" v-for="(item,index) in comment" :key="index">
+            <div class="item" v-for="(item, index) in comment" :key="index">
                 <div class="flex area-between">
                     <div class="flex row-center name">
                         <img :src="item.avatar" alt class="avatar" v-if="item.avatar" />
-                                        <img src="../assets/avatar.png" alt="" class="avatar" v-else />
+                        <img src="../assets/avatar.png" alt class="avatar" v-else />
                         <p class="c777 f28 Qomolangma nickname">{{ item.nickName }}</p>
                         <van-rate
                             v-model="item.score"
@@ -17,11 +17,12 @@
                             readonly
                         />
                     </div>
-                    <p class="f24 c777" v-if="item.createTime">{{ item.createTime.slice(0,10).replace(/-/g,'.') }}</p>
+                    <p
+                        class="f24 c777"
+                        v-if="item.createTime"
+                    >{{ item.createTime.slice(0, 10).replace(/-/g, '.') }}</p>
                 </div>
-                <div
-                    class="c333 f28 Qomolangma content"
-                >{{ item.content }}</div>
+                <div class="c333 f28 Qomolangma content">{{ item.content }}</div>
             </div>
         </van-list>
     </div>
@@ -29,24 +30,27 @@
 
 <script>
 import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue';
-import { Rate,List } from 'vant';
+import { Rate, List } from 'vant';
 import { useRoute } from 'vue-router';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'evalist',
     props: {
     },
     components: {
-        vanList: List,vanRate: Rate
+        vanList: List, vanRate: Rate
     },
     setup() {
+        const { t } = useI18n();
+        document.title=t('kechengpingjia');
         const { proxy } = getCurrentInstance();
-        const route=useRoute();
+        const route = useRoute();
         const state = reactive({
             pageNum: 1,
             total: 0,
             loading: false,
             finished: false,
-            comment:[]
+            comment: []
         })
         function getComment() {
             // 获取评论列表

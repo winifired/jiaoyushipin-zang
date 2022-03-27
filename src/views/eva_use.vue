@@ -1,7 +1,7 @@
 <template>
     <div class="eva_use" :style="{ height: focusStatus ? innerHeight : '100vh' }">
         <div class="rate">
-            <p class="f28 c333 Qomolangma class-eva">སློབ་ཁྲིད་ཀྱི་དཔྱད་བརྗོད།</p>
+            <p class="f28 c333 Qomolangma class-eva">{{$t('kechengpingjia')}}</p>
             <van-rate
                 v-model="RATEvalue"
                 color="#FFA000"
@@ -11,9 +11,9 @@
             />
         </div>
         <div class="content">
-            <p class="f28 c333 Qomolangma class-eva">དཔྱད་བརྗོད་ནང་དོན།</p>
+            <p class="f28 c333 Qomolangma class-eva">{{$t('pinjianeirong')}}</p>
             <textarea
-                placeholder="ཉིད་ཀྱིས་སློབ་ཁྲིད་ལ་དཔྱད་བརྗོད་སྤེལ་ཆོག"
+                :placeholder="$t('pingjiaplace')"
                 v-model="text"
                 @focus="getFocus"
                 @blur="getBlur"
@@ -21,7 +21,7 @@
         </div>
         <div class="fixedbottom flex area-center safeBottom">
             <div class="button-bottom bgf9d" :class="{ 'noClick': noClick }" @click="confirm">
-                <span class="c333 f32 Qomolangma">འཕྲལ་མར་གདེང་འཇོག</span>
+                <span class="c333 f32 Qomolangma">{{$t('lijitijiao')}}</span>
             </div>
         </div>
     </div>
@@ -32,6 +32,7 @@ import { defineComponent, getCurrentInstance, reactive, toRefs} from 'vue';
 import { Rate } from 'vant';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'eva_use',
     props: {
@@ -40,6 +41,8 @@ export default defineComponent({
         vanRate: Rate
     },
     setup() {
+        const { t,locale } = useI18n();
+        document.title=t('kechengpingjia');
         const route = useRoute();
         const router = useRouter();
         const store = useStore();
@@ -65,7 +68,7 @@ export default defineComponent({
                 content: state.text,
             }).then(res => {
                 if (res.code == 0) {
-                    proxy.$toast(res.msg);
+                    proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     setTimeout(() => {
                         router.go(-1)
                     }, 1000)

@@ -6,7 +6,7 @@
             </div>
             <input
                 type="text"
-                placeholder="ཁ་པར་ཨང་གྲངས་འགོད་རོགས།"
+                :placeholder="$t('login.phoneplace')"
                 class="f30 Qomolangma"
                 v-model="phoneNumber"
             />
@@ -15,7 +15,7 @@
         <div class="flex row-center login-input nowarp">
             <input
                 type="text"
-                placeholder="ཉིད་ཀྱིས་ར་སྤྲོད་ཨང་གྲངས་འགོད་རོགས།"
+                :placeholder="$t('login.yanzheng')"
                 class="f30 Qomolangma"
                 style="padding:0;"
                 v-model="codeVal"
@@ -30,9 +30,8 @@
             class="login-button f32 c333 Qomolangma register-btn"
             @click="editUse"
             :class="{ 'noClick': noClick }"
-        >གཏན་འཁེལ།</div>
+        >{{$t('login.save')}}</div>
     </div>
-    <!-- ཐོ་འགོད་ལེགས་འགྲུབ་བྱུང་པ། 注册成功 -->
 </template>
 
 <script>
@@ -40,6 +39,7 @@ import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { phone } from '../utils/check.js';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'editphone',
     props: {
@@ -47,16 +47,19 @@ export default defineComponent({
     components: {
     },
     setup() {
+        const { t,locale } = useI18n();
+        document.title=t('xiugaishoujih');
         const store = useStore();
         const router = useRouter();
         const state = reactive({
             phoneNumber: store.state.userinfo.phoneNumber,
-            codeName: 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།',
+            codeName: '',
             disabled: false,
             codeVal: '',
             noClick: false
         });
         const { proxy } = getCurrentInstance();
+        state.codeName = t('login.getyan');
         function getCode() {
             if (phone(state.phoneNumber)) {
                 setTimer();
@@ -64,11 +67,11 @@ export default defineComponent({
                     phoneNumber: state.phoneNumber,
                 }).then(res => {
                     if (res.code != 0) {
-                        state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+                        state.codeName = t('login.getyan');
                         state.disabled = false;
                         clearInterval(state.timer)
                     } else {
-                        proxy.$toast(res.msg)
+                        proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     }
                 })
             }
@@ -76,7 +79,7 @@ export default defineComponent({
         function editUse() {
             if (phone(state.phoneNumber)) {
                 if (!state.codeVal) {
-                    proxy.$toast.fail('ཉིད་ཀྱིས་ར་སྤྲོད་ཨང་གྲངས་འགོད་རོགས།');
+                    proxy.$toast.fail(t('login.yanzheng'));
                     return;
                 }
                 state.noClick=true;
@@ -86,12 +89,12 @@ export default defineComponent({
                     verificationCode: state.codeVal,
                 }).then(res => {
                     if (res.code != 0) {
-                        state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+                        state.codeName = t('login.getyan');
                         state.disabled = false;
                         clearInterval(state.timer);
                         state.noClick=false;
                     } else {
-                        proxy.$toast(res.msg);
+                        proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                         setTimeout(() => { router.go(-1); }, 1000);
                     }
                 })
@@ -105,7 +108,7 @@ export default defineComponent({
                     num--;
                     state.codeName = num + 's';
                 } else {
-                    state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+                    state.codeName = t('login.getyan');
                     state.disabled = false;
                     clearInterval(state.timer)
                 }

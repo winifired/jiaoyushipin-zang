@@ -23,13 +23,13 @@
             </div>
             <div class="tip flex area-center" v-if="!checkPlay2(2) && !isPlay">
                 <!--免费课程也可以直接观看，购买后可观看 -->
-                <p class="f26 Qomolangma">སློབ་ཡོན་སྤྲད་རྗེས་སློབ་ཁྲིད་ནང་དོན་ཆ་ཚང་ལ་གཟིགས་ཐུབ།</p>
+                <p class="f26 Qomolangma">{{$t('freesaw')}}</p>
             </div>
             <video :src="videoUrl" v-if="isPlay" autoplay controls></video>
         </div>
         <div class="class-content">
             <div class="flex column-bwn">
-                <p class="f32 c333 name Qomolangma">{{ info.name }}</p>
+                <p class="f32 c333 name Qomolangma">{{ lang=='zh'?info.name:info.nameTibetan }}</p>
                 <div class="collectStatus" @click="toggleCollect">
                     <img
                         src="../assets/star-act.png"
@@ -43,10 +43,10 @@
                         class="icon44"
                         v-if="!userid || info.isCollect != 1"
                     />
-                    <p class="f26 c777 Qomolangma">{{ collectNum }}</p>
+                    <p class="f26 c777 Qomolangma"> <span>{{$t('sc')}}</span> {{ collectNum }}</p>
                 </div>
             </div>
-            <div class="f28 c777 Qomolangma">ཏི་སེའི་དྲ་མིག</div>
+            <div class="f28 c777 Qomolangma">{{$t('appname')}}</div>
             <div class="flex area-between num">
                 <p class="flex row-center f24 c777 FZLTTHJW">
                     <img src="../assets/eye-icon.png" alt class="icon30" />
@@ -57,7 +57,7 @@
                     <span class="f28">{{ info.price }}</span>
                 </p>
                 <p class="cff5 Qomolangma" v-else>
-                    <span class="f32">རིན་མེད།</span>
+                    <span class="f32">{{$t('tabbar.free')}}</span>
                 </p>
                 <!-- རིན་མེད། 免费 -->
             </div>
@@ -69,21 +69,22 @@
                         :class="actived == 1 ? 'actived' : ''"
                         class="c777 f32 Qomolangma"
                         @click="actived = 1"
-                    >སློབ་ཁྲིད་ངོ་སྤྲོད།</p>
+                    >{{$t('detailname')}}</p>
                     <p
                         :class="actived == 2 ? 'actived' : ''"
                         class="c777 f32 Qomolangma"
                         @click="actived = 2"
                         v-if="info.courseForm == 2"
-                    >དཀར་ཆག</p>
+                    >{{$t('detailmulu')}}</p>
                     <p
                         :class="actived == 3 ? 'actived' : ''"
                         class="c777 f32 Qomolangma"
                         @click="actived = 3"
-                    >མཆན་འགོད་ཡུལ།</p>
+                    >{{$t('detaileva')}}</p>
                 </div>
                 <div class="class-detail" v-if="actived == 1">
-                    <div class="detail-content c333 f28 Qomolangma" v-html="info.detail"></div>
+                    <div class="detail-content c333 f28 Qomolangma" v-if="lang=='zh'" v-html="info.detail"></div>
+                    <div class="detail-content c333 f28 Qomolangma" v-else v-html="info.detailTibetan"></div>
                 </div>
                 <div class="class-detail" v-if="actived == 2">
                     <van-list
@@ -101,7 +102,7 @@
                             <p
                                 class="c333 f30 Qomolangma"
                                 :style="{ color: isPlay && nowPlayid == item.id ? '#FF5242' : '#333' }"
-                            >{{ item.name }}</p>
+                            >{{ lang='zh'?item.name:item.nameTibetan }}</p>
                             <img src="../assets/play-icon.png" alt class="icon44" />
                         </div>
                     </van-list>
@@ -115,7 +116,7 @@
                             <div
                                 @click="toEva"
                                 class="f26 c333 Qomolangma bgf9d toLook"
-                            >ངས་དཔྱད་བརྗོད་སྤེལ་རྒྱུ་ཡིན།</div>
+                            >{{$t('woyaopingjia')}}</div>
                         </div>
                         <div class="evas">
                             <div class="item" v-for="(item,index) in comment" :key="index">
@@ -152,7 +153,7 @@
                                 style="padding-top:15px;"
                                 v-if="comment.length > 0"
                             >
-                                དེ་ལས་མང་བོར་གཟིགས་པ།
+                                {{$t('chakangengduo')}}
                                 <img
                                     src="../assets/right-gray-icon.png"
                                     alt
@@ -175,16 +176,16 @@
             v-if="info.mode == 2 && (info.isBuy != 1 && userinfo.level != 1)"
         >
             <span class="c333 f30 FZLTTHJWBOLD marginr">¥{{ info.price }}</span>
-            <span class="c333 f32 Qomolangma">སློབ་ཡོན་སྤྲོད་པ།</span>
+            <span class="c333 f32 Qomolangma">{{$t('lijidingyue')}}</span>
             <!-- 立即订阅加入学习 -->
         </div>
         <div class="button-bottom bgf9d" @click="openpay" v-if="info.mode == 1||(info.mode == 2 && userinfo.level == 1)">
-            <span class="c333 f32 Qomolangma">མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ།</span>
+            <span class="c333 f32 Qomolangma">{{$t('jiaruxuexi')}}</span>
             <!-- མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ། 免费且登录或者已购买会员 加入学习 -->
         </div>
         <div class="button-bottom bgeee" v-if="info.mode == 2 && info.isBuy == 1">
             <!-- 付费课程  已购买 -->
-            <span class="caaa f32 Qomolangma">ཉོས་ཟིན་པ།</span>
+            <span class="caaa f32 Qomolangma">{{$t('yigoumai')}}</span>
         </div>
     </div>
     <div class="fixedbottom flex area-center safeBottom" v-if="info&&!userinfo">
@@ -196,11 +197,11 @@
             v-if="info.mode == 2 && info.isBuy != 1"
         >
             <span class="c333 f30 FZLTTHJWBOLD marginr">¥{{ info.price }}</span>
-            <span class="c333 f32 Qomolangma">སློབ་ཡོན་སྤྲོད་པ།</span>
+            <span class="c333 f32 Qomolangma">{{$t('lijidingyue')}}</span>
             <!-- 立即订阅加入学习 -->
         </div>
         <div class="button-bottom bgf9d" @click="openpay" v-if="info.mode == 1">
-            <span class="c333 f32 Qomolangma">མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ།</span>
+            <span class="c333 f32 Qomolangma">{{$t('jiaruxuexi')}}</span>
             <!-- མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ། 免费且登录或者已购买会员 加入学习 -->
         </div>
     </div>
@@ -219,6 +220,7 @@ import paytype from '../components/paytype.vue'
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
 import { getwxConfig, bindwx, getConfig, getCode } from "../utils/wxJs.js";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'detail',
     props: {
@@ -227,11 +229,13 @@ export default defineComponent({
         vanSwipe: Swipe, vanSwipeItem: SwipeItem, vanRate: Rate, paytype, vanSticky: Sticky, vanList: List
     },
     setup() {
+        const {t,locale}=useI18n();
         // 免费课程都可以看  付费课程会员可以看  用户购买付费课程后可以一直观看   
         const store = useStore();
         const route = useRoute();
         const router = useRouter();
         const state = reactive({
+            lang:locale.value,
             userid: store.state.userid,
             userinfo: store.state.userinfo,
             actived: 1,
@@ -249,6 +253,7 @@ export default defineComponent({
             videoUrl: '',//正在播放的video
             comment: [],//评论列表
         });
+        document.title = t('kcxiangqing');
         const { proxy } = getCurrentInstance();
         function openpay() {
             if (!state.userid) {
@@ -267,7 +272,7 @@ export default defineComponent({
                 }).then(res => {
                     if (res.code == 0) {
                         console.log(res);
-                        proxy.$toast(res.msg)
+                        proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan)
                     }
                 });
             }
@@ -379,7 +384,7 @@ export default defineComponent({
                 state.nowPlayid = item.id;
                 togglePlay();
             } else {
-                proxy.$toast('སྒོར་མོ་བྱིན་རྗེས་གཟིགས་ཐུབ།')
+                proxy.$toast(t('zhifuhoukekan'))
             }
             // 切换目录// 免费课程都可以看  付费课程会员可以看  用户购买付费课程后可以一直观看
         }
@@ -397,7 +402,7 @@ export default defineComponent({
                 }
                 state.isPlay = true;
             } else {
-                proxy.$toast('སྒོར་མོ་བྱིན་རྗེས་གཟིགས་ཐུབ།')
+                proxy.$toast(t('zhifuhoukekan'))
             }
         }
         function toEva() {
@@ -433,7 +438,7 @@ export default defineComponent({
                 userId: state.userid
             }).then(res => {
                 if (res.code == 0) {
-                    proxy.$toast(res.msg);
+                    proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                     getData()
                 }
             });
@@ -470,11 +475,11 @@ export default defineComponent({
                         // 微信支付
                         getConfig(res.orderString).then(res => {
                             console.log(res)
-                            proxy.$toast('རིན་སྤྲོད་ལེགས་འགྲུབ་བྱུང་བ།')
+                            proxy.$toast(t('zhifuchengg'))
                             getData();
                         }).catch(err => {
                             console.log(err)
-                            proxy.$toast('རིན་སྤྲོད་ལེགས་འགྲུབ་མ་བྱུང་བ།')
+                            proxy.$toast(t('zhifushibai'))
                         });
                     }
                 } else {
@@ -553,9 +558,9 @@ export default defineComponent({
         border-top: 1px solid #f5f5f5;
         padding: 23px 16px 0;
         .toLook {
-            width: 145px;
+            max-width: 145px;
+            padding: 5px 16px;
             height: 28px;
-            line-height: 28px;
             text-align: center;
             border-radius: 14px;
             margin: 0 0 9px;
@@ -574,6 +579,7 @@ export default defineComponent({
                     }
                 }
                 .content {
+                    word-break:break-all;
                     margin: 10px 0 0;
                 }
             }
@@ -626,7 +632,8 @@ export default defineComponent({
         left: 0;
         > p {
             color: #f9dc39;
-            width: 278px;
+            padding:0 24px;
+            // max-width: 278px;
             height: 32px;
             line-height: 32px;
             border-radius: 4px;

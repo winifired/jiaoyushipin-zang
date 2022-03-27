@@ -1,6 +1,6 @@
 <template>
     <div class="login" :style="{ height: focusStatus ? innerHeight : '100vh' }">
-        <div class="f40 c333 Qomolangma">{{$t('login.title')}}</div>
+        <div class="f40 c333 Qomolangma">{{ $t('login.title') }}</div>
         <div class="flex row-center login-input">
             <div class="imgW">
                 <img src="../assets/user-icon.png" alt class="icon40" />
@@ -29,17 +29,14 @@
         </div>
         <div class="password-btn">
             <div class="flex area-between elesItem">
-                <router-link
-                    to="/loginCode"
-                    class="Qomolangma f24 c333"
-                >{{$t('login.codelogin')}}</router-link>
-                <router-link to="/resetPass" class="Qomolangma f24 c333">{{$t('login.setpass')}}</router-link>
+                <router-link to="/loginCode" class="Qomolangma f24 c333">{{ $t('login.codelogin') }}</router-link>
+                <router-link to="/resetPass" class="Qomolangma f24 c333">{{ $t('login.setpass') }}</router-link>
             </div>
         </div>
-        <div class="login-button f32 c333 Qomolangma" @click="login">{{$t('login.login')}}</div>
+        <div class="login-button f32 c333 Qomolangma" @click="login">{{ $t('login.login') }}</div>
         <div class="f26 c777 Qomolangma register flex area-center">
-            {{$t('login.noacount')}}
-            <router-link to="/register" class="c295">{{$t('login.goregister')}}</router-link>
+            {{ $t('login.noacount') }}
+            <router-link to="/register" class="c295">{{ $t('login.goregister') }}</router-link>
         </div>
         <div
             class="fixedbottom2 flex area-center f24 c777 Qomolangma"
@@ -48,9 +45,10 @@
         >
             <img src="../assets/check-icon.png" alt v-if="!checkStatus" class="icon44" />
             <img src="../assets/checked-icon.png" alt v-else class="icon44" />
-            {{$t('login.agree')}}
-            <router-link to="/asidePage/1" class="c295"> {{$t('login.useragree')}} </router-link>{{$t('login.he')}}
-            <router-link to="/asidePage/2" class="c295"> {{$t('login.yinsi')}} </router-link>
+            {{ $t('login.agree') }}
+            <router-link to="/asidePage/1" class="c295">《{{ $t('login.useragree') }}》</router-link>
+            {{ $t('login.he') }}
+            <router-link to="/asidePage/2" class="c295">《{{ $t('login.yinsi') }}》</router-link>
         </div>
     </div>
 </template>
@@ -60,10 +58,13 @@ import { getCurrentInstance, onActivated, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { phone } from '../utils/check.js';
+import { useI18n } from "vue-i18n";
 export default {
     name: 'login',
     setup() {
         const focusStatus = ref(false);
+        const { t } = useI18n();
+        document.title = t('dl');
         const innerHeight = sessionStorage.getItem('innerHeight') + 'px';
         const checkStatus = ref(false);
         const phoneVal = ref();
@@ -85,7 +86,7 @@ export default {
             const phoneStatus = phone(phoneVal.value);
             if (phoneStatus) {
                 if (!checkStatus.value) {
-                    proxy.$toast.fail('མོས་མཐུན་《སྤྱོད་མཁན་གྱི་གྲོས་མཐུན།》དང《གསང་བའི་གྲོས་མཐུན།》');
+                    proxy.$toast.fail(t('login.tongyi'));
                     return;
                 }
                 proxy.$post(proxy.Apis.accountNumberLogin, {
@@ -93,7 +94,7 @@ export default {
                     password: password.value
                 }).then(res => {
                     if (res.code == 0) {
-                        proxy.$toast('ཐོ་འགོད་ལེགས་འགྲུབ་བྱུང་བ།');
+                        proxy.$toast(t('login.successlogin'));
                         store.commit('setUsrid', res.data.id);
                         store.commit('setUserinfo', res.data);
                         router.replace('/');

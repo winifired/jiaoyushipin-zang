@@ -2,8 +2,6 @@ import axios from 'axios'
 import qs from 'qs'
 import { Toast } from 'vant';
 const instance = axios.create({
-    // baseURL: 'http://jiaoyushipin.winderinfo.com/jysp',
-    // baseURL: 'http://172.16.42.231:8080',
     baseURL: 'http://121.43.54.145:8080/jyspfull',
     timeout: 200000,
     headers: {

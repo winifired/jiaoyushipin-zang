@@ -3,15 +3,10 @@
     <div class="swper-search">
       <div class="search flex area-between">
         <!-- <img src="../assets/logo.png" alt="" class="logo"> -->
-        <p style="width: 8vw;height: 8vw;background: #fff;text-align: center;border-radius: 50%;padding-top: 1.2vw;margin-right: 3.5vw;" @click="$t('lang.language')=='汉'?(this.$i18n.locale = 'zh'):(this.$i18n.locale = 'zangwen')">{{$t('lang.language')}}</p>
+        <p class="toggle" @click="toggleLang">{{ $t('lang.language') }}</p>
         <div class="flex row-center search-input" @click="$router.push('/search')">
           <img src="../assets/search-icon.png" alt class="icon40" />
-          <input
-            type="text"
-            readonly
-            value="ཉིད་ཀྱི་བལྟ་འདོད་པའི་སློབ་ཁྲིད་འཚོལ་བ།"
-            class="f26 caaa Qomolangma"
-          />
+          <input type="text" readonly :value="$t('home.sou')" class="f26 caaa Qomolangma" />
         </div>
         <Badge :content="state.unReadNum" max="99" :show-zero="false">
           <img
@@ -28,9 +23,9 @@
         </SwipeItem>
       </Swipe>
       <div class="flex claassify">
-        <div v-for="(item,index) in state.typeList" :key="index" @click="toSearch(item)">
+        <div v-for="(item, index) in state.typeList" :key="index" @click="toSearch(item)">
           <img :src="item.icon" alt class="icon84" />
-          <p class="f28 c333 Qomolangma">{{ item.name }}</p>
+          <p class="f28 c333 Qomolangma">{{ state.lang == 'zh' ? item.name : item.nameTibetan }}</p>
         </div>
       </div>
     </div>
@@ -38,10 +33,14 @@
       <!-- 精选课程 -->
       <div class="navigator flex area-between">
         <p class="f34 c333 Qomolangma flex row-center">
-          <span class="line"></span> {{$t('home.selected')}}
+          <span class="line"></span>
+          {{ $t('home.selected') }}
         </p>
-        <div class="flex row-center" @click="$router.push({path:'/search',query:{type:'2'}})">
-          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+        <div
+          class="flex row-center"
+          @click="$router.push({ path: '/search', query: { type: '2' } })"
+        >
+          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>
@@ -51,10 +50,11 @@
       <!-- 最新课程 -->
       <div class="navigator flex area-between">
         <p class="f34 c333 Qomolangma flex row-center">
-          <span class="line"></span>{{$t('home.newest')}}
+          <span class="line"></span>
+          {{ $t('home.newest') }}
         </p>
-        <div class="flex row-center" @click="$router.push({path:'/search'})">
-          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+        <div class="flex row-center" @click="$router.push({ path: '/search' })">
+          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>
@@ -64,10 +64,14 @@
       <!-- 免费课程 -->
       <div class="navigator flex area-between">
         <p class="f34 c333 Qomolangma flex row-center">
-          <span class="line"></span>{{$t('home.free')}}
+          <span class="line"></span>
+          {{ $t('home.free') }}
         </p>
-        <div class="flex row-center" @click="$router.push({path:'/search',query:{type:'1'}})">
-          <p class="f26 c777 Qomolangma">{{$t('home.see')}}</p>
+        <div
+          class="flex row-center"
+          @click="$router.push({ path: '/search', query: { type: '1' } })"
+        >
+          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>
@@ -79,10 +83,13 @@
 <script setup>
 import { Badge, Swipe, SwipeItem } from 'vant';
 import listshow from "@/components/list.vue";
-import { getCurrentInstance, reactive } from 'vue';
+import { getCurrentInstance, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 import { getwxConfig } from "../utils/wxJs.js";
+import { useI18n } from "vue-i18n";
 getwxConfig();
+const { t, locale } = useI18n();
+document.title = t('appname');
 const { proxy } = getCurrentInstance();
 const store = useStore();
 // 消息未读数量
@@ -94,7 +101,11 @@ const state = reactive({
   listPayCourse: [],
   listNewstCourse: [],
   listFreeCourse: [],
+  lang: locale.value
 });
+watch(() => locale.value, (newData) => {
+  state.lang = newData
+})
 proxy.$post(proxy.Apis.selectJyspCarouselList).then(res => {
   state.swiper = res.data;
 });
@@ -124,13 +135,21 @@ function toSearch(item) {
     }
   })
 }
+function toggleLang() {
+  if (locale.value == 'zh') {
+    proxy.$i18n.locale = 'zangwen'
+  } else {
+    proxy.$i18n.locale = 'zh'
+  }
+  localStorage.setItem('lang',proxy.$i18n.locale)
+}
 </script>
 
 <style scoped lang='scss'>
-.logo{
-  width:18px;
-  height:26px;
-  margin-right:10px;
+.logo {
+  width: 18px;
+  height: 26px;
+  margin-right: 10px;
 }
 .index-list {
   background: #fff;
@@ -183,7 +202,7 @@ function toSearch(item) {
       img {
         width: 343px;
         height: 148px;
-        margin:0 auto;
+        margin: 0 auto;
         border-radius: 10px;
       }
     }
@@ -192,7 +211,7 @@ function toSearch(item) {
 .search {
   padding: 8px 16px;
   &-input {
-    flex:1;
+    flex: 1;
     margin-right: 16px;
     height: 32px;
     background: #f7f7f7;
@@ -205,5 +224,15 @@ function toSearch(item) {
       flex: 1;
     }
   }
+}
+.toggle {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 12px;
 }
 </style>

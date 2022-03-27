@@ -40,5 +40,6 @@ export const Apis = {
     listJyspLearnRecord: '/api/user/listJyspLearnRecord',
     bindWeChat: '/api/user/bindWeChat',
     selectJyspUserById: '/api/user/selectJyspUserById',
-    getWxConfigInfo: '/api/user/getWxConfigInfo'
+    getWxConfigInfo: '/api/user/getWxConfigInfo',
+    listUserVip: '/api/user/listUserVip',
 };

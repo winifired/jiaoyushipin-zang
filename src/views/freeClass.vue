@@ -5,7 +5,7 @@
                 <img src="../assets/search-icon.png" alt class="icon40" />
                 <input
                     type="text"
-                    placeholder="ཉིད་ཀྱི་བལྟ་འདོད་པའི་སློབ་ཁྲིད་འཚོལ་བ།"
+                    :placeholder="$t('home.sou')"
                     class="f26 c333 Qomolangma"
                     v-model="searchVal"
                     @keyup.enter="confirmInput"
@@ -18,17 +18,17 @@
                     :class="actived == 0 ? 'actived' : ''"
                     class="c777 f32 Qomolangma"
                     @click="actived = 0"
-                >ཚང་མ།</p>
+                >{{$t('all')}}</p>
                 <p
                     :class="actived == 1 ? 'actived' : ''"
                     class="c777 f32 Qomolangma"
                     @click="actived = 1"
-                >སློབ་ཁྲིད་རྐྱང་བ།</p>
+                >{{$t('dancikc')}}</p>
                 <p
                     :class="actived == 2 ? 'actived' : ''"
                     class="c777 f32 Qomolangma"
                     @click="actived = 2"
-                >སློབ་ཁྲིད་ཆ་ཚང་།</p>
+                >{{$t('morekecheng')}}</p>
             </div>
         </div>
         <div class="array">
@@ -43,6 +43,7 @@
 import { defineComponent, getCurrentInstance, reactive, toRefs, watch} from 'vue';
 import listshow from "@/components/list.vue";
 import { List } from 'vant';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'freeClass',
     props: {
@@ -51,6 +52,8 @@ export default defineComponent({
         listshow, vanList: List
     },
     setup() {
+        const { t } = useI18n();
+        document.title=t('home.free');
         const { proxy } = getCurrentInstance();
         const innerHeight = sessionStorage.getItem('innerHeight') + 'px';
         const state = reactive({

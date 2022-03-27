@@ -33,12 +33,15 @@
 import { getCurrentInstance, reactive, ref, toRefs } from 'vue';
 import { SwipeCell, List } from 'vant';
 import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
 export default {
     name:'systemMsg',
     components: {
         SwipeCell, List
     },
     setup() {
+        const {t,locale}=useI18n();
+        document.title=t('xx');
         const list = ref([]);
         const loading = ref(false);
         const finished = ref(false);
@@ -48,6 +51,7 @@ export default {
             pageSize: 15,
             pageNum: 1,
             total: 0,
+            lang:locale.value
         })
         const onLoad = () => {
             proxy.$post(proxy.Apis.selectJyspMessageList, {

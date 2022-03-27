@@ -6,7 +6,7 @@
             </div>
             <input
                 type="text"
-                placeholder="ཁ་པར་ཨང་གྲངས་འགོད་རོགས།"
+                :placeholder="$t('login.phoneplace')"
                 class="f30 Qomolangma"
                 v-model="state.phoneVal"
             />
@@ -15,7 +15,7 @@
         <div class="flex row-center login-input nowarp">
             <input
                 type="text"
-                placeholder="ཉིད་ཀྱིས་ར་སྤྲོད་ཨང་གྲངས་འགོད་རོགས།"
+                :placeholder="$t('login.yanzheng')"
                 class="f30 Qomolangma"
                 style="padding:0;"
                 v-model="state.codeVal"
@@ -30,13 +30,13 @@
         <div class="flex row-center login-input">
             <input
                 type="password"
-                placeholder="གསང་ཨང་འགོད་རོགས།"
+                :placeholder="$t('login.passplace')"
                 class="f30 Qomolangma"
                 style="padding:0;"
                 v-model="state.password"
             />
         </div>
-        <div class="login-button f32 c333 Qomolangma register-btn" @click="register" :class="{ 'noClick': state.noClick }">གཏན་འཁེལ།</div>
+        <div class="login-button f32 c333 Qomolangma register-btn" @click="register" :class="{ 'noClick': state.noClick }">{{$t('login.save')}}</div>
     </div>
     <!-- ཐོ་འགོད་ལེགས་འགྲུབ་བྱུང་པ། 注册成功 -->
 </template>
@@ -45,8 +45,9 @@
 import { getCurrentInstance, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { phone } from '../utils/check.js';
+import { useI18n } from "vue-i18n";
 const state = reactive({
-    codeName: 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།',
+    codeName: '',
     phoneVal: '',
     disabled: false,
     codeVal: '',
@@ -54,8 +55,11 @@ const state = reactive({
     timer: null,
     noClick:false
 });
+ const { t,locale } = useI18n();
+ document.title=t('login.setpass')
 const {proxy}=getCurrentInstance();
 const router=useRouter();
+state.codeName = t('login.getyan');
 function getCode() {
     if (phone(state.phoneVal)) {
         setTimer();
@@ -63,11 +67,11 @@ function getCode() {
             accountNumber: state.phoneVal,
         }).then(res => {
             if (res.code != 0) {
-                state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+                state.codeName = t('login.getyan');
                 state.disabled = false;
                 clearInterval(state.timer)
             } else {
-                proxy.$toast(res.msg)
+                proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
             }
         })
     }
@@ -75,11 +79,11 @@ function getCode() {
 const register = () => {
     if (phone(state.phoneVal)) {
         if (!state.codeVal) {
-            proxy.$toast.fail('ཉིད་ཀྱིས་ར་སྤྲོད་ཨང་གྲངས་འགོད་རོགས།');
+            proxy.$toast.fail(t('login.yanzheng'));
             return;
         }
         if (!state.password) {
-            proxy.$toast.fail('གསང་ཨང་འགོད་རོགས།');
+            proxy.$toast.fail(t('login.passplace'));
             return;
         }
         state.noClick=true;
@@ -90,12 +94,12 @@ const register = () => {
             confirmPassword: state.password,
         }).then(res => {
             if (res.code != 0) {
-                state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+                state.codeName = t('login.getyan');
                 state.disabled = false;
                 clearInterval(state.timer);
                 state.noClick=false;
             } else {
-                proxy.$toast(res.msg);
+                proxy.$toast(locale.value=='zh'?res.msg:res.msgTibetan);
                 router.replace('/login');
             }
         })
@@ -109,7 +113,7 @@ function setTimer() {
             num--;
             state.codeName = num + 's';
         } else {
-            state.codeName = 'ར་སྤྲོད་ཨང་གྲངས་ལེན་པ།';
+            state.codeName = t('login.getyan');
             state.disabled = false;
             clearInterval(state.timer)
         }

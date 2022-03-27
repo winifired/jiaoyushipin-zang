@@ -10,7 +10,7 @@ const messages = {
 }
 
 // 默认语言
-const langDefault = 'zh'
+const langDefault = localStorage.getItem('lang')?localStorage.getItem('lang'):'zh'
 
 const i18n = createI18n({
   locale: langDefault,

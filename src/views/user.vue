@@ -1,78 +1,82 @@
 <template>
     <div class="user">
-        <div class="user-bg flex row-center">
-            <img
-                :src="userinfo.avatar"
-                alt
-                class="avatar"
-                v-if="userid && userinfo && userinfo.avatar"
-            />
-            <img src="../assets/avatar.png" alt class="avatar" v-else />
-            <p
-                class="f30 c333 Qomolangma"
-                v-if="userid"
-                @click="$router.push('/userMsg')"
-            >{{ userinfo.nickName || 'དྲ་མིང་འགོད་པ།' }}</p>
-            <p class="f30 c333 Qomolangma" v-else @click="$router.push('/login')">ཐོ་འགོད་བྱེད་པ།</p>
-            <img
-                src="../assets/vip-user.png"
-                alt
-                class="vip-user"
-                v-if="userinfo && userinfo.level == 1"
-            />
-        </div>
-        <div class="flex area-between vipMsg">
-            <div class="flex row-center">
-                <img src="../assets/vip-icon.png" alt class="icon48" />
-                <span class="Qomolangma f28 c6f5">རྒྱུན་མི།</span>
-            </div>
-            <div class="flex row-center" v-if="userinfo && userinfo.level == 1">
-                <p class="Qomolangma f26 c6f5">
-                    <span class="marginr">{{ userinfo.vipValidTime?userinfo.vipValidTime.slice(0,10):'' }}</span>
-                    <span>རིན་གཅོག་དུས་ཚོད་ལོངས་པ།</span>
+        <div class="user-vip flex">
+            <div class="c845 f30 Qomolangma flex">
+                <img
+                    :src="userinfo.avatar"
+                    alt
+                    class="avatar"
+                    v-if="userid && userinfo && userinfo.avatar"
+                />
+                <img src="../assets/avatar.png" alt class="avatar" v-else />
+                <p v-if="userid" class="flex Qomolangma usernick">
+                    {{ userinfo.nickName || $t('nicheng') }}
+                    <img
+                        src="../assets/vip-user.png"
+                        alt
+                        class="vip-user-icon"
+                        v-if="userid && userinfo && userinfo.level == 1"
+                    />
                 </p>
-                <img src="../assets/user-block.png" alt class="icon40" />
+                <!-- 立即登录 -->
+                <p
+                    class="c845 f30 Qomolangma usernick"
+                    v-else
+                    @click="$router.push('/login')"
+                >{{ $t('loginname') }}</p>
+            </div>
+            <div class="flex uservip">
+                <div v-for="(item, index) in listUserVipContent" :key="index">
+                    <p>{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
+                    <p>{{ item.vipValidTime ? item.vipValidTime.split(' ')[0] : '' }}{{ $t('daoqi') }}</p>
+                </div>
             </div>
         </div>
         <!-- 个人资料 -->
         <router-link :to="userid ? '/userMsg' : '/login'" class="flex area-between toItem">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/user-01.png" alt class="icon44" />{{$t('users.personaldata')}}
+                <img src="../assets/user-01.png" alt class="icon44" />
+                {{ $t('users.personaldata') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </router-link>
         <!-- 我的收藏 -->
         <router-link :to="userid ? '/userCollect' : '/login'" class="flex area-between toItem">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/user-02.png" alt class="icon44" />{{$t('users.mycollection')}}
+                <img src="../assets/user-02.png" alt class="icon44" />
+                {{ $t('users.mycollection') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </router-link>
         <!-- 学习记录 -->
         <router-link :to="userid ? '/userLean' : '/login'" class="flex area-between toItem">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/user-03.png" alt class="icon44" />{{$t('users.records')}}
+                <img src="../assets/user-03.png" alt class="icon44" />
+                {{ $t('users.records') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </router-link>
         <!-- 关于我们 -->
         <router-link class="flex area-between toItem" to="/asidePage/3">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/usere-04.png" alt class="icon44" />{{$t('users.about')}}
+                <img src="../assets/usere-04.png" alt class="icon44" />
+                {{ $t('users.about') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </router-link>
         <!-- 联系我们 -->
         <div class="flex area-between toItem" @click="show = true">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/user-04.png" alt class="icon44" />{{$t('users.contact')}}
+                <img src="../assets/user-04.png" alt class="icon44" />
+                {{ $t('users.contact') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </div>
         <!-- 退出登录 -->
         <div class="flex area-between toItem" @click="outlogin">
             <p class="flex row-center f26 c333 Qomolangma">
-                <img src="../assets/user-05.png" alt class="icon44" />{{$t('users.signout')}}
+                <img src="../assets/user-05.png" alt class="icon44" />
+                {{ $t('users.signout') }}
             </p>
             <img src="../assets/user-gray.png" alt class="icon44" />
         </div>
@@ -85,7 +89,7 @@
                     400-8523201030
                 </a>
             </router-link>
-            <p class="f32 cffa Qomolangma item" @click="show = false">ཕྱིར་འཐེན།</p>
+            <p class="f32 cffa Qomolangma item" @click="show = false">{{ $t('quxiao') }}</p>
         </div>
     </van-overlay>
 </template>
@@ -95,6 +99,7 @@ import { Overlay } from 'vant';
 import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
 export default defineComponent({
     name: 'user',
     props: {
@@ -104,6 +109,8 @@ export default defineComponent({
         vanOverlay: Overlay
     },
     setup() {
+        const { t,locale } = useI18n();
+        document.title=t('appname')
         const store = useStore();
         const router = useRouter();
         const { proxy } = getCurrentInstance();
@@ -111,16 +118,29 @@ export default defineComponent({
             show: false,
             userid: store.state.userid,
             userinfo: store.state.userinfo,
+            listUserVipContent: [],
+            lang: locale.value
         });
-        if(store.state.userid){
+        if (store.state.userid) {
             getuserinfo();
+            listUserVip();
+        }
+        function listUserVip() {
+            // 会员购买的vip
+            proxy.$post(proxy.Apis.listUserVip, {
+                userId: store.state.userid,
+            }).then(res => {
+                if (res.code == 0) {
+                    state.listUserVipContent = res.data
+                }
+            })
         }
         function getuserinfo() {
             proxy.$post(proxy.Apis.selectJyspUserById, {
                 userId: state.userid
             }).then(res => {
-                if(res.code==0){
-                    state.userinfo=res.data;
+                if (res.code == 0) {
+                    state.userinfo = res.data;
                     store.commit('setUserinfo', res.data);
                 }
             });
@@ -132,7 +152,7 @@ export default defineComponent({
                 store.commit('clearData');
                 router.removeRoute();
                 router.replace('/');
-                proxy.$toast('ཕྱིར་འཐེན་ལེགས་འགྲུབ་བྱུང་བ།')
+                proxy.$toast(t('tuichucg'))
             } else {
                 router.push('/login');
             }
@@ -179,37 +199,46 @@ export default defineComponent({
 .toItem:not(:last-child) {
     border-bottom: 1px solid #f5f5f5;
 }
-.user-bg {
-    width: 100%;
-    height: 121px;
-    background: url(../assets/user-bg.png) no-repeat;
+.user-vip {
+    min-height: 144px;
+    background: url(../assets/vipbg.png) no-repeat;
     background-size: 100% 100%;
-    padding: 32px 0 0 32px;
+    padding: 12px 16px;
+    margin: 24px 16px 0;
     .avatar {
-        width: 60px;
-        height: 60px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        margin-right: 16px;
-        object-fit: cover;
+        margin-right: 18px;
     }
-    .vip-user {
-        margin-left: 8px;
-        width: 18px;
-        height: 18px;
+    .usernick {
+        padding-top: 12px;
     }
-}
-.vipMsg {
-    margin: 4px 16px 0;
-    background: url(../assets/user-vip-bg.png) no-repeat;
-    background-size: 100% 100%;
-    padding: 0 16px;
-    height: 56px;
-    margin-bottom: calc(50px - 17px);
-    .icon48 {
-        margin-right: 8px;
-    }
-    .icon40 {
-        margin-left: 19px;
+    .uservip {
+        > div {
+            margin-top: 12px;
+            width: 149px;
+            height: 52px;
+            background: rgba(254, 254, 254, 0.3);
+            border-radius: 4px;
+            padding: 6px 0 0 12px;
+            > p:nth-child(1) {
+                font-size: 14px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: #694b2f;
+            }
+            > p:nth-child(2) {
+                margin-top: 4px;
+                font-size: 11px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #6f500d;
+            }
+        }
+        > div:not(:nth-child(2n)) {
+            margin-right: 13px;
+        }
     }
 }
 </style>

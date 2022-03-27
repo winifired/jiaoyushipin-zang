@@ -3,10 +3,11 @@ import {
 } from 'vant';
 var dayjs = require('dayjs');
 dayjs.locale('zh-cn');
+import i18n from "../lang/index";
 export function phone(number) {
     var reg = 11 && /^((13|14|15|16|17|18|19)[0-9]{1}\d{8})$/;
     if (number == '' || !reg.test(number)) {
-        Toast('ཁ་པར་ཨང་གྲངས་ཀྱི་རྣམ་གཞག་བཏགས་ནོར་ཤོར་འདུག');
+        Toast(i18n.global.t('phoneerror'));
         return false;
     } else {
         return true;
