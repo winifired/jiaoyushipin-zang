@@ -300,7 +300,9 @@ export default defineComponent({
                     if (res.data.courseForm == 2) {
                         getlistCatalogueByCourseId();
                     }
-                    getwxConfig(res.data.cover,res.data.name);
+                    console.log(state.lang)
+                    let name=state.lang=='zh'?res.data.name:res.data.nameTibetan;
+                    getwxConfig(res.data.cover,name);
                 }
             });
             // 收藏数量

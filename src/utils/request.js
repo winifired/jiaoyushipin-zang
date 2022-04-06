@@ -30,7 +30,7 @@ const request = (url, options) => {
                 Toast.fail(value.statusText);
             }
         }).catch(error => {
-            Toast.fail('网络错误，请稍后重试');
+            // Toast.fail('网络错误，请稍后重试');
             reject(error)
         })
     })
