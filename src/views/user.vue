@@ -9,7 +9,7 @@
                     v-if="userid && userinfo && userinfo.avatar"
                 />
                 <img src="../assets/avatar.png" alt class="avatar" v-else />
-                <p v-if="userid" class="flex Qomolangma usernick">
+                <p v-if="userid" class="flex Qomolangma usernick row-center">
                     {{ userinfo.nickName || $t('nicheng') }}
                     <img
                         src="../assets/vip-user.png"
@@ -240,5 +240,10 @@ export default defineComponent({
             margin-right: 13px;
         }
     }
+}
+.vip-user-icon{
+    width: 22px;
+    height: 22px;
+    margin-left: 10px;
 }
 </style>

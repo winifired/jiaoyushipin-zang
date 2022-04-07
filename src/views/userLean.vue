@@ -24,7 +24,7 @@
                 >
                     <van-image radius="5" :src="item.cover" class="image" />
                     <div class="content">
-                        <div class="f30 c333 Qomolangma title">{{item.name}}</div>
+                        <div class="f30 c333 Qomolangma title">{{lang=='zh'?item.name:item.nameTibetan}}</div>
                         <div class="f22 c777 Qomolangma companyName" v-if="item.createTime">
                             {{$t('shangcixuexi')}}
                             <span>{{item.createTime.slice(0,10).replace(/-/g,'.')}}</span>
@@ -63,7 +63,8 @@ export default defineComponent({
             listCourse: [],
             loading: false,
             finished: false,
-            actived: 1
+            actived: 1,
+            lang: locale.value
         });
         watch(() => state.actived, (newData) => {
             state.pageNum = 1;

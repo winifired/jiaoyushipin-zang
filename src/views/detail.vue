@@ -560,7 +560,6 @@ export default defineComponent({
         border-top: 1px solid #f5f5f5;
         padding: 23px 16px 0;
         .toLook {
-            max-width: 145px;
             padding: 5px 16px;
             height: 28px;
             text-align: center;

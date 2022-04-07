@@ -12,10 +12,10 @@
                     <div class="content">
                         <div class="flex area-between">
                             <!-- 系统通知 -->
-                            <p class="c333 f30 Qomolangma">{{ item.title }}</p>
+                            <p class="c333 f30 Qomolangma">{{ lang=='zh'?item.title:item.titleTibetan }}</p>
                             <p class="caaa f26">{{ $filters.gettime(item.createTime) }}</p>
                         </div>
-                        <div class="c777 f24 Qomolangma content-msg">{{ item.content }}</div>
+                        <div class="c777 f24 Qomolangma content-msg">{{ lang=='zh'?item.content:item.contentTibetan }}</div>
                     </div>
                 </div>
                 <template #right>
