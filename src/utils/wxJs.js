@@ -8,7 +8,6 @@ import store from "../store";
 import {
     Toast
 } from 'vant';
-import { useI18n } from "vue-i18n";
 export function getConfig(data = {}) {
     console.log(data);
     return new Promise((resolve, reject) => {
@@ -94,11 +93,11 @@ export function getwxConfig(coverImg = 'http://jiaoyushipin.winderinfo.com/jysp/
                 jsApiList: ['chooseWXPay', 'updateTimelineShareData', 'updateAppMessageShareData']
             });
             let des='བྱིས་སྒྲུང་། རྣམ་ཐར། ཁེད། གབ་ཚིག རྒྱུན་ཤེས་སོགས་འགུལ་རིས་ཀྱི་རྣམ་པར་བཟོས་ཡོད་ཅིང་། མཉེན་ཆས་སྐོར་གྱི་སློབ་ཁྲིད་ཀྱང་ཡོད།';
-            const {locale}=useI18n();
+            const locale=localStorage.getItem('lang');
             if(!title){
-                share(coverImg, locale.value=='zh'?'':'ཏི་སེའི་དྲ་མིག་སློབ་གསོ།', locale.value=='zh'?'':des);
+                share(coverImg, locale=='zh'?'藏童':'ཏི་སེའི་དྲ་མིག་སློབ་གསོ།', locale=='zh'?'本藏童网站以动画形式传授贤者传和童话、谜语、生活常识等知识。':des);
             }else{
-                share(coverImg, title, locale.value=='zh'?'':des);
+                share(coverImg, title, locale=='zh'?'本藏童网站以动画形式传授贤者传和童话、谜语、生活常识等知识。':des);
             }
         }
     })
