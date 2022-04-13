@@ -81,19 +81,19 @@
 </template>
 
 <script setup>
-import { Badge, Swipe, SwipeItem } from 'vant';
+import { Badge, Swipe, SwipeItem } from "vant";
 import listshow from "@/components/list.vue";
-import { getCurrentInstance, reactive, watch } from 'vue';
-import { useStore } from 'vuex';
+import { getCurrentInstance, reactive, watch } from "vue";
+import { useStore } from "vuex";
 import { getwxConfig } from "../utils/wxJs.js";
 import { useI18n } from "vue-i18n";
 getwxConfig();
 const { t, locale } = useI18n();
-document.title = t('appname');
+document.title = t("appname");
 const { proxy } = getCurrentInstance();
 const store = useStore();
 // 消息未读数量
-store.dispatch('getUnReadNum');
+store.dispatch("getUnReadNum");
 const state = reactive({
   swiper: [],
   unReadNum: store.state.UnReadNum,
@@ -101,47 +101,50 @@ const state = reactive({
   listPayCourse: [],
   listNewstCourse: [],
   listFreeCourse: [],
-  lang: locale.value
+  lang: locale.value,
 });
-watch(() => locale.value, (newData) => {
-  state.lang = newData
-})
-proxy.$post(proxy.Apis.selectJyspCarouselList).then(res => {
+watch(
+  () => locale.value,
+  (newData) => {
+    state.lang = newData;
+  }
+);
+proxy.$post(proxy.Apis.selectJyspCarouselList).then((res) => {
   state.swiper = res.data;
 });
-proxy.$post(proxy.Apis.selectJyspCourseTypeList).then(res => {
+proxy.$post(proxy.Apis.selectJyspCourseTypeList).then((res) => {
   state.typeList = res.data;
 });
 let data = {
-  isRecommend: 1,//是否推荐：1推荐，0不推荐
+  isRecommend: 1, //是否推荐：1推荐，0不推荐
   pageNum: 1,
-  pageSize: 6
+  pageSize: 6,
 };
-proxy.$post(proxy.Apis.listPayCourse, data).then(res => {
+proxy.$post(proxy.Apis.listPayCourse, data).then((res) => {
   state.listPayCourse = res.data.rows;
-  console.log(state.listPayCourse)
+  console.log(state.listPayCourse);
 });
-proxy.$post(proxy.Apis.listNewstCourse, data).then(res => {
+proxy.$post(proxy.Apis.listNewstCourse, data).then((res) => {
   state.listNewstCourse = res.data;
 });
-proxy.$post(proxy.Apis.listFreeCourse, data).then(res => {
+proxy.$post(proxy.Apis.listFreeCourse, data).then((res) => {
   state.listFreeCourse = res.data.rows;
 });
 function toSearch(item) {
   proxy.$router.push({
-    path: '/search',
+    path: "/search",
     query: {
-      typeMsg: JSON.stringify({ name: item.name, id: item.id })
-    }
-  })
+      typeMsg: JSON.stringify({ name: item.name, id: item.id }),
+    },
+  });
 }
 function toggleLang() {
-  if (locale.value == 'zh') {
-    proxy.$i18n.locale = 'zangwen'
+  if (locale.value == "zh") {
+    proxy.$i18n.locale = "zangwen";
   } else {
-    proxy.$i18n.locale = 'zh'
+    proxy.$i18n.locale = "zh";
   }
-  localStorage.setItem('lang',proxy.$i18n.locale)
+  localStorage.setItem("lang", proxy.$i18n.locale);
 }
 </script>
 
@@ -157,6 +160,9 @@ function toggleLang() {
   margin: 8px 0 0;
   .navigator {
     margin: 0 0 12px;
+    .font34 {
+      font-weight: 500;
+    }
     .line {
       display: block;
       width: 4px;
@@ -172,13 +178,17 @@ function toggleLang() {
   }
 }
 .claassify {
+  position: relative;
+  z-index: 2;
   padding: 12px 0 0.01px;
   > div {
     width: 25%;
     margin: 0 0 9px;
     > img {
-      border-radius: 50%;
+      border-radius: 13px;
       margin: 0 auto 5px;
+      width: 42px;
+      height: 42px;
     }
     > p {
       text-align: center;
@@ -190,12 +200,24 @@ function toggleLang() {
   background: #f8f8f8;
   padding: 0 0 24px;
 }
+.swper-search:after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 141px;
+  background: #fff;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
 .swper-search {
   min-height: 160px;
-  background: url(../assets/index_bg.png) no-repeat;
-  background-size: 100% 160px;
-  background-color: #ffffff;
+  position: relative;
+  background-color: #f8f8f8;
+  z-index: 2;
   .my-swipe {
+    position: relative;
+    z-index: 2;
     .van-swipe-item {
       height: 148px;
 
@@ -203,18 +225,20 @@ function toggleLang() {
         width: 343px;
         height: 148px;
         margin: 0 auto;
-        border-radius: 10px;
+        border-radius: 4px;
       }
     }
   }
 }
 .search {
   padding: 8px 16px;
+  position: relative;
+  z-index: 2;
   &-input {
     flex: 1;
     margin-right: 16px;
     height: 32px;
-    background: #f7f7f7;
+    background: #ffffff;
     border-radius: 16px;
     padding: 0 12px;
     img {

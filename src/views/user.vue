@@ -204,6 +204,7 @@ export default defineComponent({
     background: url(../assets/vipbg.png) no-repeat;
     background-size: 100% 100%;
     padding: 12px 16px;
+    border-radius:6px;
     margin: 24px 16px 0;
     .avatar {
         width: 48px;

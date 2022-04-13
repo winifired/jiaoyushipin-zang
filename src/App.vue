@@ -63,22 +63,25 @@ export default {
   }
 }
 @font-face {
-  font-family: "Qomolangma-Subtitle";
-  src: url("./common/Qomolangma-Subtitle.ttf") format("truetype");
+  font-family: "PingFangSC-Medium, PingFang SC";
+  src: url('./assets/font/FZLTTHJW2.TTF') format("truetype");
+  // src: url('./assets/font/FZLTTHJW.eot?#font-spider') format('embedded-opentype'), url('./assets/font/FZLTTHJW.woff') format('woff'), 
+  // url('./assets/font/FZLTTHJW.ttf') format('truetype'), url('./assets/font/FZLTTHJW.svg') format('svg');
 }
 
 @font-face {
   font-family: "FZLTTHJW";
-  src: url("./common/方正兰亭纤黑简体.TTF") format("truetype");
+  src: url("./common/fangzheng.TTF") format("truetype");
 }
 
 @font-face {
   font-family: "FZLTTHJWBOLD";
-  src: url("./common/FZLTTHJW.TTF") format("truetype");
+  src: url("./assets/font/FZLTTHJWbold.ttf") format("truetype");
 }
 
 .Qomolangma {
-  font-family: "Qomolangma-Subtitle";
+  font-family: "PingFangSC-Medium, PingFang SC";
+  font-weight: 500;
 }
 
 .FZLTTHJW {

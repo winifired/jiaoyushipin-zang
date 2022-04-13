@@ -48,10 +48,13 @@ watch(() => props.list, (newData) => {
 <style scoped lang='scss'>
 .list {
     .item {
+        .title{
+            font-weight: 500;
+        }
         .image {
             width: 120px;
             height: 80px;
-            border-radius: 5px;
+            border-radius: 2px!important;
             margin-right: 16px;
         }
         .content {

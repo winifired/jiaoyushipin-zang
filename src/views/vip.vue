@@ -198,6 +198,7 @@ export default defineComponent({
     background-size: 100% 100%;
     padding: 12px 16px;
     margin: 0 auto;
+    border-radius:6px;
     .avatar {
       width: 48px;
       height: 48px;
