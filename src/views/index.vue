@@ -32,7 +32,7 @@
     <div class="index-list">
       <!-- 精选课程 -->
       <div class="navigator flex area-between">
-        <p class="f34 c333 flex row-center" :class="$i18n.locale == 'zh'?'bold':''">
+        <p class="f34 c333 flex row-center">
           <span class="line"></span>
           {{ $t('home.selected') }}
         </p>
