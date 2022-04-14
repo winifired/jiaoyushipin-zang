@@ -27,8 +27,8 @@
             </div>
             <div class="flex uservip">
                 <div v-for="(item, index) in listUserVipContent" :key="index">
-                    <p>{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
-                    <p>{{ item.vipValidTime ? item.vipValidTime.split(' ')[0] : '' }}{{ $t('daoqi') }}</p>
+                    <p class="f28">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
+                    <p class="f22">{{ item.vipValidTime ? item.vipValidTime.split(' ')[0] : '' }}{{ $t('daoqi') }}</p>
                 </div>
             </div>
         </div>

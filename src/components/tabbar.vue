@@ -4,22 +4,22 @@
       <div @click="$router.push('/')">
         <img src="../assets/index.png" alt v-if="currentPage != 1" />
         <img src="../assets/index_act.png" alt v-else />
-        <p>{{$t('tabbar.index')}}</p>
+        <p :class="currentPage==1?'actives':''">{{$t('tabbar.index')}}</p>
       </div>
       <div @click="$router.push('/vip')">
         <img src="../assets/vip.png" alt v-if="currentPage != 2" />
         <img src="../assets/vip_act.png" alt v-else />
-        <p>{{$t('tabbar.vip')}}</p>
+        <p :class="currentPage==2?'actives':''">{{$t('tabbar.vip')}}</p>
       </div>
       <div @click="$router.push('/freeClass')">
         <img src="../assets/free.png" alt v-if="currentPage != 3" />
         <img src="../assets/free_act.png" alt v-else />
-        <p>{{$t('tabbar.free')}}</p>
+        <p :class="currentPage==3?'actives':''">{{$t('tabbar.free')}}</p>
       </div>
       <div @click="$router.push('/user')">
         <img src="../assets/use.png" alt v-if="currentPage != 4" />
         <img src="../assets/use_act.png" alt v-else />
-        <p>{{$t('tabbar.user')}}</p>
+        <p :class="currentPage==4?'actives':''">{{$t('tabbar.user')}}</p>
       </div>
     </div>
     <div class="fixedHeight" :style="{ height: fixedHeight }"></div>
@@ -74,8 +74,10 @@ onUnmounted(() => {
   p {
     text-align: center;
     font-size: 11px;
-    font-weight: normal;
-    color: #333333;
+    color: #777;
+  }
+  .actives{
+    color: #333!important;
   }
 }
 </style>

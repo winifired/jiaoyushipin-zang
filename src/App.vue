@@ -1,4 +1,5 @@
 <template>
+ <!-- -->
   <div class="pageContent" :class="$i18n.locale=='zh'?'pingfangF':'QomolangmaF'">
     <router-view v-slot="{ Component }">
       <keep-alive :include="['login', 'loginCode']">
@@ -65,6 +66,7 @@ export default {
   // 苹方-简
   font-family: "pingfang";
   src: url('./assets/font/pingfang.TTF') format("truetype");
+  // src: url('./assets/font/PINGFANG\ MEDIUM_1.TTF') format("truetype");
 }
 
 @font-face {
@@ -100,6 +102,9 @@ export default {
   img {
     width: 100%;
   }
+}
+.bold{
+  font-weight: bold;
 }
 .fixedbottom {
   position: fixed;

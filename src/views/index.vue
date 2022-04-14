@@ -2,7 +2,8 @@
   <div class="index">
     <div class="swper-search">
       <div class="search flex area-between">
-        <p class="toggle" @click="toggleLang">{{ $t('lang.language') }}</p>
+         <!-- :class="$i18n.locale == 'zh'?'bold':''"  -->
+        <p class="toggle" @click="toggleLang" :class="$i18n.locale != 'zh'?'bold':''">{{ $t('lang.language') }}</p>
         <div class="flex row-center search-input" @click="$router.push('/search')">
           <img src="../assets/search-icon.png" alt class="icon40" />
           <input type="text" readonly :value="$t('home.sou')" class="f26 caaa" />
@@ -31,7 +32,7 @@
     <div class="index-list">
       <!-- 精选课程 -->
       <div class="navigator flex area-between">
-        <p class="f34 c333 flex row-center">
+        <p class="f34 c333 flex row-center" :class="$i18n.locale == 'zh'?'bold':''">
           <span class="line"></span>
           {{ $t('home.selected') }}
         </p>

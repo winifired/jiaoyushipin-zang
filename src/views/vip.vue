@@ -16,10 +16,10 @@
         <!-- 立即登录 -->
         <p class="c845 f30 usernick" v-else @click="$router.push('/login')">{{ $t('loginname') }}</p>
       </div>
-      <div class="flex uservip">
+      <div class="flex uservip ">
         <div v-for="(item, index) in listUserVipContent" :key="index">
-          <p>{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
-          <p>{{ item.vipValidTime ? item.vipValidTime.split(' ')[0] : '' }}{{ $t('daoqi') }}</p>
+          <p class="f28">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
+          <p class="font22">{{ item.vipValidTime ? item.vipValidTime.split(' ')[0] : '' }}{{ $t('daoqi') }}</p>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
         :class="choosed == index ? 'choosed' : ''"
         @click="choosed = index"
       >
-        <p class="c845 title-item">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
+        <p class="c845 title-item f32">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
         <p class="c845 FZLTTHJWF">
           <span class="f20">￥</span>
           <span class="f36">{{ item.price }}</span>
