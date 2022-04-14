@@ -48,7 +48,7 @@ export default {
   viptitle: '会员卡类型',
   nicheng: '用户昵称',
   loginname: '立即登录',
-  appname: '迪斯之窗',
+  appname: '藏童',
   kechengxingshi: '课程形式',
   jiage: '价格',
   all: '全部',

@@ -50,7 +50,7 @@ export default {
   viptitle: 'ཟུར་གཅོག་བྱང་བུའི་རིགས།',
   nicheng: 'མིང་།',
   loginname: 'མྱུར་ཏུ་ཐོ་འགོད་བྱེད་པ།',
-  appname: 'ཏི་སེའི་དྲ་མིག',
+  appname: 'བོད་ཀྱི་གཅེས་ཕྲུག',
   kechengxingshi: 'སློབ་ཁྲིད་ཀྱི་རྣམ་པ།',
   jiage: 'རིན་གོང་།',
   all: 'ཚང་མ།',
