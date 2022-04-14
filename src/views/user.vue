@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <div class="user-vip flex">
-            <div class="c845 f30 Qomolangma flex">
+            <div class="c845 f30 flex">
                 <img
                     :src="userinfo.avatar"
                     alt
@@ -9,7 +9,7 @@
                     v-if="userid && userinfo && userinfo.avatar"
                 />
                 <img src="../assets/avatar.png" alt class="avatar" v-else />
-                <p v-if="userid" class="flex Qomolangma usernick row-center">
+                <p v-if="userid" class="flex usernick row-center">
                     {{ userinfo.nickName || $t('nicheng') }}
                     <img
                         src="../assets/vip-user.png"
@@ -20,7 +20,7 @@
                 </p>
                 <!-- 立即登录 -->
                 <p
-                    class="c845 f30 Qomolangma usernick"
+                    class="c845 f30 usernick"
                     v-else
                     @click="$router.push('/login')"
                 >{{ $t('loginname') }}</p>
@@ -34,7 +34,7 @@
         </div>
         <!-- 个人资料 -->
         <router-link :to="userid ? '/userMsg' : '/login'" class="flex area-between toItem">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/user-01.png" alt class="icon44" />
                 {{ $t('users.personaldata') }}
             </p>
@@ -42,7 +42,7 @@
         </router-link>
         <!-- 我的收藏 -->
         <router-link :to="userid ? '/userCollect' : '/login'" class="flex area-between toItem">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/user-02.png" alt class="icon44" />
                 {{ $t('users.mycollection') }}
             </p>
@@ -50,7 +50,7 @@
         </router-link>
         <!-- 学习记录 -->
         <router-link :to="userid ? '/userLean' : '/login'" class="flex area-between toItem">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/user-03.png" alt class="icon44" />
                 {{ $t('users.records') }}
             </p>
@@ -58,7 +58,7 @@
         </router-link>
         <!-- 关于我们 -->
         <router-link class="flex area-between toItem" to="/asidePage/3">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/usere-04.png" alt class="icon44" />
                 {{ $t('users.about') }}
             </p>
@@ -66,7 +66,7 @@
         </router-link>
         <!-- 联系我们 -->
         <div class="flex area-between toItem" @click="show = true">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/user-04.png" alt class="icon44" />
                 {{ $t('users.contact') }}
             </p>
@@ -74,7 +74,7 @@
         </div>
         <!-- 退出登录 -->
         <div class="flex area-between toItem" @click="outlogin">
-            <p class="flex row-center f26 c333 Qomolangma">
+            <p class="flex row-center f26 c333">
                 <img src="../assets/user-05.png" alt class="icon44" />
                 {{ $t('users.signout') }}
             </p>
@@ -89,7 +89,7 @@
                     400-8523201030
                 </a>
             </router-link>
-            <p class="f32 cffa Qomolangma item" @click="show = false">{{ $t('quxiao') }}</p>
+            <p class="f32 cffa item" @click="show = false">{{ $t('quxiao') }}</p>
         </div>
     </van-overlay>
 </template>

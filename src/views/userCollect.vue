@@ -23,11 +23,11 @@
                 />
                 <van-image radius="5" :src="item.cover" class="image" />
                 <div class="content">
-                    <div class="f30 c333 Qomolangma title">{{ lang=='zh'?item.name:item.nameTibetan }}</div>
+                    <div class="f30 c333 title">{{ lang=='zh'?item.name:item.nameTibetan }}</div>
                     <!-- 公司名 -->
-                    <div class="f26 c777 Qomolangma companyName">{{$t('appname')}}</div>
+                    <div class="f26 c777 companyName">{{$t('appname')}}</div>
                     <div class="flex area-between price">
-                        <p class="FZLTTHJW f24 c777 flex row-center">
+                        <p class="FZLTTHJWF f24 c777 flex row-center">
                             <img src="../assets/eye-icon.png" alt class="icon30" />
                             {{ item.learnTime }}
                         </p>
@@ -49,7 +49,7 @@
             {{$t('all')}}
         </p>
         <div
-            class="confirm Qomolangma f32 c333"
+            class="confirm f32 c333"
             :class="{ 'noClick': noClick }"
             @click="confirm"
         >{{$t('quxiaoshoucang')}}</div>

@@ -6,7 +6,7 @@
                     <div class="flex row-center name">
                         <img :src="item.avatar" alt class="avatar" v-if="item.avatar" />
                         <img src="../assets/avatar.png" alt class="avatar" v-else />
-                        <p class="c777 f28 Qomolangma nickname">{{ item.nickName }}</p>
+                        <p class="c777 f28 nickname">{{ item.nickName }}</p>
                         <van-rate
                             v-model="item.score"
                             color="#FFA000"
@@ -22,7 +22,7 @@
                         v-if="item.createTime"
                     >{{ item.createTime.slice(0, 10).replace(/-/g, '.') }}</p>
                 </div>
-                <div class="c333 f28 Qomolangma content">{{ item.content }}</div>
+                <div class="c333 f28 content">{{ item.content }}</div>
             </div>
         </van-list>
     </div>

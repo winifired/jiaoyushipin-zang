@@ -74,7 +74,6 @@ onUnmounted(() => {
   p {
     text-align: center;
     font-size: 11px;
-    font-family: Qomolangma-Subtitle, Qomolangma;
     font-weight: normal;
     color: #333333;
   }

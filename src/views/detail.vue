@@ -23,13 +23,13 @@
             </div>
             <div class="tip flex area-center" v-if="!checkPlay2(2) && !isPlay">
                 <!--免费课程也可以直接观看，购买后可观看 -->
-                <p class="f26 Qomolangma">{{$t('freesaw')}}</p>
+                <p class="f26">{{$t('freesaw')}}</p>
             </div>
             <video :src="videoUrl" v-if="isPlay" autoplay controls></video>
         </div>
         <div class="class-content">
             <div class="flex column-bwn">
-                <p class="f32 c333 name Qomolangma">{{ lang=='zh'?info.name:info.nameTibetan }}</p>
+                <p class="f32 c333 name">{{ lang=='zh'?info.name:info.nameTibetan }}</p>
                 <div class="collectStatus" @click="toggleCollect">
                     <img
                         src="../assets/star-act.png"
@@ -43,20 +43,20 @@
                         class="icon44"
                         v-if="!userid || info.isCollect != 1"
                     />
-                    <p class="f26 c777 Qomolangma"> <span>{{$t('sc')}}</span> {{ collectNum }}</p>
+                    <p class="f26 c777"> <span>{{$t('sc')}}</span> {{ collectNum }}</p>
                 </div>
             </div>
-            <div class="f28 c777 Qomolangma">{{$t('appname')}}</div>
+            <div class="f28 c777">{{$t('appname')}}</div>
             <div class="flex area-between num">
-                <p class="flex row-center f24 c777 FZLTTHJW">
+                <p class="flex row-center f24 c777 fangzhenglantingF">
                     <img src="../assets/eye-icon.png" alt class="icon30" />
                     {{ info.learnTime }}
                 </p>
-                <p class="cff5 FZLTTHJWBOLD" v-if="info.mode == 2">
+                <p class="cff5 FZLTTHJWF" v-if="info.mode == 2">
                     <span class="f24">￥</span>
                     <span class="f28">{{ info.price }}</span>
                 </p>
-                <p class="cff5 Qomolangma" v-else>
+                <p class="cff5" v-else>
                     <span class="f32">{{$t('tabbar.free')}}</span>
                 </p>
                 <!-- རིན་མེད། 免费 -->
@@ -67,24 +67,24 @@
                 <div class="class-nav flex area-around">
                     <p
                         :class="actived == 1 ? 'actived' : ''"
-                        class="c777 f32 Qomolangma"
+                        class="c777 f32"
                         @click="actived = 1"
                     >{{$t('detailname')}}</p>
                     <p
                         :class="actived == 2 ? 'actived' : ''"
-                        class="c777 f32 Qomolangma"
+                        class="c777 f32"
                         @click="actived = 2"
                         v-if="info.courseForm == 2"
                     >{{$t('detailmulu')}}</p>
                     <p
                         :class="actived == 3 ? 'actived' : ''"
-                        class="c777 f32 Qomolangma"
+                        class="c777 f32"
                         @click="actived = 3"
                     >{{$t('detaileva')}}</p>
                 </div>
                 <div class="class-detail" v-if="actived == 1">
-                    <div class="detail-content c333 f28 Qomolangma" v-if="lang=='zh'" v-html="info.detail"></div>
-                    <div class="detail-content c333 f28 Qomolangma" v-else v-html="info.detailTibetan"></div>
+                    <div class="detail-content c333 f28" v-if="lang=='zh'" v-html="info.detail"></div>
+                    <div class="detail-content c333 f28" v-else v-html="info.detailTibetan"></div>
                 </div>
                 <div class="class-detail" v-if="actived == 2">
                     <van-list
@@ -100,7 +100,7 @@
                         >
                             <!-- 播放中显示#FF5242 -->
                             <p
-                                class="c333 f30 Qomolangma"
+                                class="c333 f30"
                                 :style="{ color: isPlay && nowPlayid == item.id ? '#FF5242' : '#333' }"
                             >{{ lang='zh'?item.name:item.nameTibetan }}</p>
                             <img src="../assets/play-icon.png" alt class="icon44" />
@@ -115,7 +115,7 @@
                         >
                             <div
                                 @click="toEva"
-                                class="f26 c333 Qomolangma bgf9d toLook"
+                                class="f26 c333 bgf9d toLook"
                             >{{$t('woyaopingjia')}}</div>
                         </div>
                         <div class="evas">
@@ -129,7 +129,7 @@
                                             v-if="item.avatar"
                                         />
                                         <img src="../assets/avatar.png" alt class="avatar" v-else />
-                                        <p class="c777 f28 Qomolangma nickname">{{ item.nickName }}</p>
+                                        <p class="c777 f28 nickname">{{ item.nickName }}</p>
                                         <van-rate
                                             v-model="item.score"
                                             color="#FFA000"
@@ -145,11 +145,11 @@
                                         v-if="item.createTime"
                                     >{{ item.createTime.slice(0, 10).replace(/-/g, '.') }}</p>
                                 </div>
-                                <div class="c333 f28 Qomolangma content">{{ item.content }}</div>
+                                <div class="c333 f28 content">{{ item.content }}</div>
                             </div>
                             <router-link
                                 :to="{ path: '/evalist', query: { courseId: $route.params.id } }"
-                                class="item flex area-center f26 caaa Qomolangma"
+                                class="item flex area-center f26 caaa"
                                 style="padding-top:15px;"
                                 v-if="comment.length > 0"
                             >
@@ -175,17 +175,17 @@
             @click="openpay"
             v-if="info.mode == 2 && (info.isBuy != 1 && userinfo.level != 1)"
         >
-            <span class="c333 f30 FZLTTHJWBOLD marginr">¥{{ info.price }}</span>
-            <span class="c333 f32 Qomolangma">{{$t('lijidingyue')}}</span>
+            <span class="c333 f30 FZLTTHJWF marginr">¥{{ info.price }}</span>
+            <span class="c333 f32">{{$t('lijidingyue')}}</span>
             <!-- 立即订阅加入学习 -->
         </div>
         <div class="button-bottom bgf9d" @click="openpay" v-if="info.mode == 1||(info.mode == 2 && userinfo.level == 1)">
-            <span class="c333 f32 Qomolangma">{{$t('jiaruxuexi')}}</span>
+            <span class="c333 f32">{{$t('jiaruxuexi')}}</span>
             <!-- མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ། 免费且登录或者已购买会员 加入学习 -->
         </div>
         <div class="button-bottom bgeee" v-if="info.mode == 2 && info.isBuy == 1">
             <!-- 付费课程  已购买 -->
-            <span class="caaa f32 Qomolangma">{{$t('yigoumai')}}</span>
+            <span class="caaa f32">{{$t('yigoumai')}}</span>
         </div>
     </div>
     <div class="fixedbottom flex area-center safeBottom" v-if="info&&!userinfo">
@@ -196,12 +196,12 @@
             @click="openpay"
             v-if="info.mode == 2 && info.isBuy != 1"
         >
-            <span class="c333 f30 FZLTTHJWBOLD marginr">¥{{ info.price }}</span>
-            <span class="c333 f32 Qomolangma">{{$t('lijidingyue')}}</span>
+            <span class="c333 f30 FZLTTHJWF marginr">¥{{ info.price }}</span>
+            <span class="c333 f32">{{$t('lijidingyue')}}</span>
             <!-- 立即订阅加入学习 -->
         </div>
         <div class="button-bottom bgf9d" @click="openpay" v-if="info.mode == 1">
-            <span class="c333 f32 Qomolangma">{{$t('jiaruxuexi')}}</span>
+            <span class="c333 f32">{{$t('jiaruxuexi')}}</span>
             <!-- མུ་མཐུད་དུ་སློབ་སྦྱོང་བྱེད་པ། 免费且登录或者已购买会员 加入学习 -->
         </div>
     </div>

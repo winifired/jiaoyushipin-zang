@@ -4,12 +4,12 @@
             <div class="class-nav flex area-around">
                 <p
                     :class="actived == 1 ? 'actived' : ''"
-                    class="c777 f32 Qomolangma"
+                    class="c777 f32"
                     @click="actived = 1"
                 >{{$t('home.free')}}</p>
                 <p
                     :class="actived == 2 ? 'actived' : ''"
-                    class="c777 f32 Qomolangma"
+                    class="c777 f32"
                     @click="actived = 2"
                 >{{$t('huiyuankecheng')}}</p>
             </div>
@@ -24,14 +24,14 @@
                 >
                     <van-image radius="5" :src="item.cover" class="image" />
                     <div class="content">
-                        <div class="f30 c333 Qomolangma title">{{lang=='zh'?item.name:item.nameTibetan}}</div>
-                        <div class="f22 c777 Qomolangma companyName" v-if="item.createTime">
+                        <div class="f30 c333 title">{{lang=='zh'?item.name:item.nameTibetan}}</div>
+                        <div class="f22 c777 companyName" v-if="item.createTime">
                             {{$t('shangcixuexi')}}
                             <span>{{item.createTime.slice(0,10).replace(/-/g,'.')}}</span>
                         </div>
                         <div class="flex area-between price">
                             <p class="Qomolangma f22 c777 flex row-center">{{$t('appname')}}</p>
-                            <div class="confirm f24 c333 Qomolangma">{{$t('jixuxuexi')}}</div>
+                            <div class="confirm f24 c333">{{$t('jixuxuexi')}}</div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="userMsg" v-if="userinfo">
         <div class="flex area-between item marginb8 itemelse">
-            <p class="f28 c333 Qomolangma">{{$t('touxiang')}}</p>
+            <p class="f28 c333">{{$t('touxiang')}}</p>
             <div class="flex row-center">
                 <van-uploader :after-read="afterRead" accept="image/*">
                     <img :src="avatar" alt class="avatar" v-if="avatar" />
@@ -12,11 +12,11 @@
         </div>
         <div class="flex area-between item">
             <!-- 昵称 -->
-            <p class="f28 c333 Qomolangma">{{$t('nicheng')}}</p>
+            <p class="f28 c333">{{$t('nicheng')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
-                    class="f28 caaa Qomolangma"
+                    class="f28 caaa"
                     v-model="nickName"
                     @keyup.enter="confirmInput(2)"
                 />
@@ -25,7 +25,7 @@
         </div>
         <div class="flex area-between item">
             <!-- 微信 -->
-            <p class="f28 c333 Qomolangma">{{$t('weixin')}}</p>
+            <p class="f28 c333">{{$t('weixin')}}</p>
             <div class="flex row-center msg" @click="bindWeChat">
                 <input
                     type="text"
@@ -38,7 +38,7 @@
         </div>
         <div class="flex area-between item">
             <!-- qq -->
-            <p class="f28 c333 Qomolangma">{{$t('qq')}}</p>
+            <p class="f28 c333">{{$t('qq')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
@@ -51,11 +51,11 @@
         </div>
         <div class="flex area-between item">
             <!-- 职业 -->
-            <p class="f28 c333 Qomolangma">{{$t('zhiye')}}</p>
+            <p class="f28 c333">{{$t('zhiye')}}</p>
             <div class="flex row-center msg">
                 <input
                     type="text"
-                    class="f28 caaa Qomolangma"
+                    class="f28 caaa"
                     v-model="job"
                     @keyup.enter="confirmInput(4)"
                 />
@@ -64,7 +64,7 @@
         </div>
         <div class="flex area-between item" @click="$router.push('/editphone')">
             <!-- 手机号 -->
-            <p class="f28 c333 Qomolangma">{{$t('bangdingshoujihao')}}</p>
+            <p class="f28 c333">{{$t('bangdingshoujihao')}}</p>
             <div class="flex row-center msg">
                 <p class="f28 caaa">{{ userinfo.phoneNumber }}</p>
                 <img src="../assets/usermsg-right.png" alt class="icon36" />

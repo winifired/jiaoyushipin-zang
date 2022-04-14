@@ -8,15 +8,15 @@
         >
             <van-image radius="5" :src="item.cover" fit="cover" class="image" />
             <div class="content">
-                <div class="f30 c333 Qomolangma title">{{state.lang=='zh'?item.name:item.nameTibetan}}</div>
+                <div class="f30 c333 title">{{state.lang=='zh'?item.name:item.nameTibetan}}</div>
                 <!-- 公司名 -->
-                <div class="f26 c777 Qomolangma companyName">{{t('appname')}}</div>
+                <div class="f26 c777 companyName">{{t('appname')}}</div>
                 <div class="flex area-between price">
-                    <p class="FZLTTHJW f24 c777 flex row-center" v-if="item.learnTime>=0">
+                    <p class="fangzhenglantingF f24 c777 flex row-center" v-if="item.learnTime>=0">
                         <img src="../assets/eye-icon.png" alt class="icon30" />{{item.learnTime>999?'999+':item.learnTime}}
                     </p>
                     <p class="Qomolangma f32 cff5" v-if="item.mode == 1">{{t('tabbar.free')}}</p>
-                    <p class="FZLTTHJWBOLD f28 cff5" v-else>
+                    <p class="FZLTTHJWF f28 cff5" v-else>
                         <span class="f24">￥</span>{{item.price||0}}
                     </p>
                 </div>

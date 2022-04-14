@@ -1,5 +1,5 @@
 <template>
-    <div v-html="info" class="contentF f32 Qomolangma c333"></div>
+    <div v-html="info" class="contentF f32 c333"></div>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default defineComponent({
         const {t,locale}=useI18n();
         //1 སྤྱོད་མཁན་གྱི་གྲོས་མཐུན། 用户协议  2 གསང་བའི་གྲོས་མཐུན།隐私协议 3关于我们ངེད་ཀྱི་སྐོར།
         const state = reactive({
-            info: ''
+            info: '',
         })
         console.log(locale.value)
         const route = useRoute();

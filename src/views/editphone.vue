@@ -7,7 +7,7 @@
             <input
                 type="text"
                 :placeholder="$t('login.phoneplace')"
-                class="f30 Qomolangma"
+                class="f30"
                 v-model="phoneNumber"
             />
         </div>
@@ -16,18 +16,18 @@
             <input
                 type="text"
                 :placeholder="$t('login.yanzheng')"
-                class="f30 Qomolangma"
+                class="f30"
                 style="padding:0;"
                 v-model="codeVal"
             />
             <div
-                class="getCode f30 Qomolangma"
+                class="getCode f30"
                 @click="getCode()"
                 :disabled="disabled"
             >{{ codeName }}</div>
         </div>
         <div
-            class="login-button f32 c333 Qomolangma register-btn"
+            class="login-button f32 c333 register-btn"
             @click="editUse"
             :class="{ 'noClick': noClick }"
         >{{$t('login.save')}}</div>

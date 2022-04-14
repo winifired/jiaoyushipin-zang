@@ -1,6 +1,5 @@
 <template>
-  <!-- <router-view /> -->
-  <div class="pageContent">
+  <div class="pageContent" :class="$i18n.locale=='zh'?'pingfangF':'QomolangmaF'">
     <router-view v-slot="{ Component }">
       <keep-alive :include="['login', 'loginCode']">
         <component :is="Component" />
@@ -63,33 +62,39 @@ export default {
   }
 }
 @font-face {
-  font-family: "PingFangSC-Medium, PingFang SC";
-  src: url('./assets/font/FZLTTHJW2.TTF') format("truetype");
-  // src: url('./assets/font/FZLTTHJW.eot?#font-spider') format('embedded-opentype'), url('./assets/font/FZLTTHJW.woff') format('woff'), 
-  // url('./assets/font/FZLTTHJW.ttf') format('truetype'), url('./assets/font/FZLTTHJW.svg') format('svg');
+  // 苹方-简
+  font-family: "pingfang";
+  src: url('./assets/font/pingfang.TTF') format("truetype");
 }
 
 @font-face {
+  // 方正兰亭特黑简体
   font-family: "FZLTTHJW";
-  src: url("./common/fangzheng.TTF") format("truetype");
+  src: url("./assets/font/FZLTTHJW.TTF") format("truetype");
 }
 
 @font-face {
-  font-family: "FZLTTHJWBOLD";
-  src: url("./assets/font/FZLTTHJWbold.ttf") format("truetype");
+  // 方正兰亭纤黑简体
+  font-family: "fangzhenglanting";
+  src: url("./assets/font/fangzhenglanting.TTF") format("truetype");
 }
-
-.Qomolangma {
-  font-family: "PingFangSC-Medium, PingFang SC";
+@font-face {
+  // 珠穆朗玛-小标题
+  font-family: "Qomolangma";
+  src: url("./assets/font/Qomolangma-Subtitle.ttf") format("truetype");
+}
+.pingfangF {
+  font-family: "pingfang";
   font-weight: 500;
 }
-
-.FZLTTHJW {
-  font-family: "FZLTTHJW";
+.QomolangmaF {
+  font-family: "Qomolangma";
 }
-
-.FZLTTHJWBOLD {
-  font-family: "FZLTTHJWBOLD";
+.fangzhenglantingF {
+  font-family: "fangzhenglanting";
+}
+.FZLTTHJWF {
+  font-family: "FZLTTHJW";
 }
 .detail-content {
   img {

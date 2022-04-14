@@ -2,9 +2,9 @@
     <div>
         <Overlay :show="state.showModel" @click.stop="closemodel" z-index="100">
             <div class="payType">
-                <p class="f30 c333 Qomolangma title">{{$t('zfxz')}}</p>
+                <p class="f30 c333 title">{{$t('zfxz')}}</p>
                 <div class="item flex area-between borderb" @click.stop="state.choosed = 1">
-                    <div class="flex row-center f28 c333 Qomolangma">
+                    <div class="flex row-center f28 c333">
                         <img src="../assets/wx.png" alt class="icontype" />{{$t('wxzf')}}
                     </div>
                     <img
@@ -16,7 +16,7 @@
                     <img src="../assets/check-icon.png" alt class="icon48" v-else />
                 </div>
                 <div class="item flex area-between" @click.stop="state.choosed = 2">
-                    <div class="flex row-center f28 c333 Qomolangma">
+                    <div class="flex row-center f28 c333">
                         <img src="../assets/zfb.png" alt class="icontype" />{{$t('zfbzf')}}
                     </div>
                     <img
@@ -28,7 +28,7 @@
                     <img src="../assets/check-icon.png" alt class="icon48" v-else />
                 </div>
                 <div class="button-bottom bgf9d" :class="{'noClick':state.noClick}" @click="emit('buyCourse',state.choosed)">
-                    <span class="c333 f32 Qomolangma">{{$t('qr')}}</span>
+                    <span class="c333 f32">{{$t('qr')}}</span>
                 </div>
             </div>
         </Overlay>

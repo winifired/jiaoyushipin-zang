@@ -7,7 +7,7 @@
             <input
                 type="text"
                 :placeholder="$t('login.phoneplace')"
-                class="f30 Qomolangma"
+                class="f30"
                 v-model="state.phoneVal"
             />
         </div>
@@ -16,12 +16,12 @@
             <input
                 type="text"
                 :placeholder="$t('login.yanzheng')"
-                class="f30 Qomolangma"
+                class="f30"
                 style="padding:0;"
                 v-model="state.codeVal"
             />
             <button
-                class="getCode f30 Qomolangma"
+                class="getCode f30"
                 @click="getCode()"
                 :disabled="state.disabled"
             >{{ state.codeName }}</button>
@@ -31,12 +31,12 @@
             <input
                 type="password"
                 :placeholder="$t('login.passplace')"
-                class="f30 Qomolangma"
+                class="f30"
                 style="padding:0;"
                 v-model="state.password"
             />
         </div>
-        <div class="login-button f32 c333 Qomolangma register-btn" @click="register" :class="{ 'noClick': state.noClick }">{{$t('login.save')}}</div>
+        <div class="login-button f32 c333 register-btn" @click="register" :class="{ 'noClick': state.noClick }">{{$t('login.save')}}</div>
     </div>
     <!-- ཐོ་འགོད་ལེགས་འགྲུབ་བྱུང་པ། 注册成功 -->
 </template>

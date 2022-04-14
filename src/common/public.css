@@ -1,0 +1,240 @@
+.van-dropdown-menu__bar {
+  box-shadow: none !important;
+  height: 50px !important;
+}
+
+.van-dropdown-menu__title::after {
+  opacity: 0 !important;
+}
+
+.f40 {
+  font-size: 20px;
+}
+
+.f36 {
+  font-size: 18px;
+}
+
+.f34 {
+  font-size: 17px;
+}
+
+.f32 {
+  font-size: 16px;
+}
+
+.f30 {
+  font-size: 15px;
+}
+
+.f28 {
+  font-size: 14px;
+}
+
+.f26 {
+  font-size: 13px;
+}
+
+.f24 {
+  font-size: 12px;
+}
+
+.f22 {
+  font-size: 11px;
+}
+
+.f20 {
+  font-size: 10px;
+}
+
+.c333 {
+  color: #333;
+}
+
+.c777 {
+  color: #777;
+}
+
+.cfff {
+  color: #fff;
+}
+
+.caaa {
+  color: #aaa;
+}
+
+.cff5 {
+  color: #FF5242;
+}
+
+.c295 {
+  color: #2594EC;
+}
+
+.c845 {
+  color: #845626;
+}
+
+.ca06 {
+  color: #A0682E;
+}
+
+.c6f5 {
+  color: #6F500D;
+}
+
+.cffa {
+  color: #FFA000;
+}
+
+.icon40 {
+  width: 20px;
+  height: 20px;
+}
+
+.icon30 {
+  width: 15px;
+  height: 15px;
+}
+
+.icon32 {
+  width: 16px;
+  height: 16px;
+}
+
+.icon36 {
+  width: 18px;
+  height: 18px;
+}
+
+.icon44 {
+  width: 22px;
+  height: 22px;
+}
+
+.icon48 {
+  width: 24px;
+  height: 24px;
+}
+
+.icon84 {
+  width: 42px;
+  height: 42px;
+}
+
+.icon80 {
+  width: 40px;
+  height: 40px;
+}
+
+.safeBottom {
+  padding-bottom: calc(8px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+}
+
+.safeBottom120 {
+  padding-bottom: 120px !important;
+}
+
+.noClick {
+  pointer-events: none;
+  background: rgba(202, 202, 202, 0.5) !important;
+}
+
+input,
+textarea {
+  display: block;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+div,
+p,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 15px;
+  font-family: 'QomolangmaF';
+  font-weight: normal;
+  color: #AAAAAA;
+}
+
+img,
+a {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex.row-top {
+  align-items: flex-start;
+}
+
+.flex.row-center {
+  align-items: center;
+}
+
+.flex.row-end {
+  align-items: flex-end;
+}
+
+.flex.column-top {
+  justify-content: flex-start;
+}
+
+.flex.column-center {
+  justify-content: center;
+}
+
+.flex.column-end {
+  justify-content: flex-end;
+}
+
+.flex.column-bwn {
+  justify-content: space-between;
+}
+
+.flex.column-around {
+  justify-content: space-around;
+}
+
+.flex.area-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex.area-between {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex.area-around {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.line1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.line2 {
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

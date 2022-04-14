@@ -2,11 +2,10 @@
   <div class="index">
     <div class="swper-search">
       <div class="search flex area-between">
-        <!-- <img src="../assets/logo.png" alt="" class="logo"> -->
         <p class="toggle" @click="toggleLang">{{ $t('lang.language') }}</p>
         <div class="flex row-center search-input" @click="$router.push('/search')">
           <img src="../assets/search-icon.png" alt class="icon40" />
-          <input type="text" readonly :value="$t('home.sou')" class="f26 caaa Qomolangma" />
+          <input type="text" readonly :value="$t('home.sou')" class="f26 caaa" />
         </div>
         <Badge :content="state.unReadNum" max="99" :show-zero="false">
           <img
@@ -25,14 +24,14 @@
       <div class="flex claassify">
         <div v-for="(item, index) in state.typeList" :key="index" @click="toSearch(item)">
           <img :src="item.icon" alt class="icon84" />
-          <p class="f28 c333 Qomolangma">{{ state.lang == 'zh' ? item.name : item.nameTibetan }}</p>
+          <p class="f28 c333">{{ state.lang == 'zh' ? item.name : item.nameTibetan }}</p>
         </div>
       </div>
     </div>
     <div class="index-list">
       <!-- 精选课程 -->
       <div class="navigator flex area-between">
-        <p class="f34 c333 Qomolangma flex row-center">
+        <p class="f34 c333 flex row-center">
           <span class="line"></span>
           {{ $t('home.selected') }}
         </p>
@@ -40,7 +39,7 @@
           class="flex row-center"
           @click="$router.push({ path: '/search', query: { type: '2' } })"
         >
-          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
+          <p class="f26 c777">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>
@@ -49,12 +48,12 @@
     <div class="index-list">
       <!-- 最新课程 -->
       <div class="navigator flex area-between">
-        <p class="f34 c333 Qomolangma flex row-center">
+        <p class="f34 c333 flex row-center">
           <span class="line"></span>
           {{ $t('home.newest') }}
         </p>
         <div class="flex row-center" @click="$router.push({ path: '/search' })">
-          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
+          <p class="f26 c777">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>
@@ -63,7 +62,7 @@
     <div class="index-list">
       <!-- 免费课程 -->
       <div class="navigator flex area-between">
-        <p class="f34 c333 Qomolangma flex row-center">
+        <p class="f34 c333 flex row-center">
           <span class="line"></span>
           {{ $t('home.free') }}
         </p>
@@ -71,7 +70,7 @@
           class="flex row-center"
           @click="$router.push({ path: '/search', query: { type: '1' } })"
         >
-          <p class="f26 c777 Qomolangma">{{ $t('home.see') }}</p>
+          <p class="f26 c777">{{ $t('home.see') }}</p>
           <img src="../assets/right-icon.png" alt class="icon40" />
         </div>
       </div>

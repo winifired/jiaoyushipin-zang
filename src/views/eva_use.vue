@@ -1,7 +1,7 @@
 <template>
     <div class="eva_use" :style="{ height: focusStatus ? innerHeight : '100vh' }">
         <div class="rate">
-            <p class="f28 c333 Qomolangma class-eva">{{$t('kechengpingjia')}}</p>
+            <p class="f28 c333 class-eva">{{$t('kechengpingjia')}}</p>
             <van-rate
                 v-model="RATEvalue"
                 color="#FFA000"
@@ -11,7 +11,7 @@
             />
         </div>
         <div class="content">
-            <p class="f28 c333 Qomolangma class-eva">{{$t('pinjianeirong')}}</p>
+            <p class="f28 c333 class-eva">{{$t('pinjianeirong')}}</p>
             <textarea
                 :placeholder="$t('pingjiaplace')"
                 v-model="text"
@@ -21,7 +21,7 @@
         </div>
         <div class="fixedbottom flex area-center safeBottom">
             <div class="button-bottom bgf9d" :class="{ 'noClick': noClick }" @click="confirm">
-                <span class="c333 f32 Qomolangma">{{$t('lijitijiao')}}</span>
+                <span class="c333 f32">{{$t('lijitijiao')}}</span>
             </div>
         </div>
     </div>

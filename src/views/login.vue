@@ -1,6 +1,6 @@
 <template>
     <div class="login" :style="{ height: focusStatus ? innerHeight : '100vh' }">
-        <div class="f40 c333 Qomolangma">{{ $t('login.title') }}</div>
+        <div class="f40 c333">{{ $t('login.title') }}</div>
         <div class="flex row-center login-input">
             <div class="imgW">
                 <img src="../assets/user-icon.png" alt class="icon40" />
@@ -8,7 +8,7 @@
             <input
                 type="text"
                 :placeholder="$t('login.phoneplace')"
-                class="f30 Qomolangma"
+                class="f30"
                 v-model="phoneVal"
                 @focus="getFocus"
                 @blur="getBlur"
@@ -21,7 +21,7 @@
             <input
                 type="password"
                 :placeholder="$t('login.passplace')"
-                class="f30 Qomolangma"
+                class="f30"
                 v-model="password"
                 @focus="getFocus"
                 @blur="getBlur"
@@ -33,13 +33,13 @@
                 <router-link to="/resetPass" class="Qomolangma f24 c333">{{ $t('login.setpass') }}</router-link>
             </div>
         </div>
-        <div class="login-button f32 c333 Qomolangma" @click="login">{{ $t('login.login') }}</div>
-        <div class="f26 c777 Qomolangma register flex area-center">
+        <div class="login-button f32 c333" @click="login">{{ $t('login.login') }}</div>
+        <div class="f26 c777 register flex area-center">
             {{ $t('login.noacount') }}
             <router-link to="/register" class="c295">{{ $t('login.goregister') }}</router-link>
         </div>
         <div
-            class="fixedbottom2 flex area-center f24 c777 Qomolangma"
+            class="fixedbottom2 flex area-center f24 c777"
             @click.stop="checkStatus = !checkStatus"
             style="background:#fff"
         >

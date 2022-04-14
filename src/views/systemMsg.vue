@@ -12,15 +12,15 @@
                     <div class="content">
                         <div class="flex area-between">
                             <!-- 系统通知 -->
-                            <p class="c333 f30 Qomolangma">{{ lang=='zh'?item.title:item.titleTibetan }}</p>
+                            <p class="c333 f30">{{ lang=='zh'?item.title:item.titleTibetan }}</p>
                             <p class="caaa f26">{{ $filters.gettime(item.createTime) }}</p>
                         </div>
-                        <div class="c777 f24 Qomolangma content-msg">{{ lang=='zh'?item.content:item.contentTibetan }}</div>
+                        <div class="c777 f24 content-msg">{{ lang=='zh'?item.content:item.contentTibetan }}</div>
                     </div>
                 </div>
                 <template #right>
                     <p
-                        class="cfff f30 Qomolangma right-btn flex area-center"
+                        class="cfff f30 right-btn flex area-center"
                         @click.stop="delate(index)"
                     >འདོར་བ།</p>
                 </template>

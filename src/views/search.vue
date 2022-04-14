@@ -6,7 +6,7 @@
                 <input
                     type="text"
                     :placeholder="$t('home.sou')"
-                    class="f26 c333 Qomolangma"
+                    class="f26 c333"
                     v-model="searchVal"
                     @keyup.enter="confirmInput"
                 />
@@ -14,7 +14,7 @@
             <van-dropdown-menu class="dropdown-meau" active-color="#FFA000">
                 <van-dropdown-item class="dropdown-item" @open="openMeau(1)" @close="closeMeau">
                     <template #title>
-                        <p class="f28 Qomolangma flex row-center">
+                        <p class="f28 flex row-center">
                             <span>{{$t('kechengxingshi')}}</span>
                             <img
                                 src="../assets/up-icon.png"
@@ -36,7 +36,7 @@
                         :key="index"
                         @click.stop="changeItem1(index)"
                     >
-                        <p class="f30 c777 Qomolangma">{{ tag.text }}</p>
+                        <p class="f30 c777">{{ tag.text }}</p>
                         <img
                             src="../assets/right-yellow.png"
                             alt
@@ -47,7 +47,7 @@
                 </van-dropdown-item>
                 <van-dropdown-item class="dropdown-item" @open="openMeau(2)" @close="closeMeau">
                     <template #title>
-                        <p class="f28 Qomolangma flex row-center">
+                        <p class="f28 flex row-center">
                             {{$t('jiage')}}
                             <img
                                 src="../assets/up-icon.png"
@@ -69,7 +69,7 @@
                         :key="index"
                         @click.stop="changeItem2(index)"
                     >
-                        <p class="f30 c777 Qomolangma">{{ tag.text }}</p>
+                        <p class="f30 c777">{{ tag.text }}</p>
                         <img
                             src="../assets/right-yellow.png"
                             alt

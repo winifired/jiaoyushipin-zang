@@ -6,7 +6,7 @@
                 <input
                     type="text"
                     :placeholder="$t('home.sou')"
-                    class="f26 c333 Qomolangma"
+                    class="f26 c333"
                     v-model="searchVal"
                     @keyup.enter="confirmInput"
                     @focus="getFocus"
@@ -16,17 +16,17 @@
             <div class="class-nav flex area-around">
                 <p
                     :class="actived == 0 ? 'actived' : ''"
-                    class="c777 f32 Qomolangma"
+                    class="c777 f32"
                     @click="actived = 0"
                 >{{$t('all')}}</p>
                 <p
                     :class="actived == 1 ? 'actived' : ''"
-                    class="c777 f32 Qomolangma"
+                    class="c777 f32"
                     @click="actived = 1"
                 >{{$t('dancikc')}}</p>
                 <p
                     :class="actived == 2 ? 'actived' : ''"
-                    class="c777 f32 Qomolangma"
+                    class="c777 f32"
                     @click="actived = 2"
                 >{{$t('morekecheng')}}</p>
             </div>

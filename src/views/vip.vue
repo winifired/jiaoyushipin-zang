@@ -1,10 +1,10 @@
 <template>
   <div class="vip">
     <div class="user-vip flex">
-      <div class="c845 f30 Qomolangma flex">
+      <div class="c845 f30 flex">
         <img :src="userinfo.avatar" alt class="avatar" v-if="userid && userinfo && userinfo.avatar" />
         <img src="../assets/avatar.png" alt class="avatar" v-else />
-        <p v-if="userid" class="flex Qomolangma usernick">
+        <p v-if="userid" class="flex usernick">
           {{ userinfo.nickName || $t('nicheng') }}
           <img
             src="../assets/vip-user.png"
@@ -14,7 +14,7 @@
           />
         </p>
         <!-- 立即登录 -->
-        <p class="c845 f30 Qomolangma usernick" v-else @click="$router.push('/login')">{{ $t('loginname') }}</p>
+        <p class="c845 f30 usernick" v-else @click="$router.push('/login')">{{ $t('loginname') }}</p>
       </div>
       <div class="flex uservip">
         <div v-for="(item, index) in listUserVipContent" :key="index">
@@ -23,29 +23,29 @@
         </div>
       </div>
     </div>
-    <p class="title f32 c333 Qomolangma">{{ $t('viptitle') }}</p>
+    <p class="title f32 c333">{{ $t('viptitle') }}</p>
     <div class="list flex">
       <div
         v-for="(item, index) in vipCardList"
         :key="item.id"
-        class="flex area-center"
+        class="flex area-around"
         :class="choosed == index ? 'choosed' : ''"
         @click="choosed = index"
       >
-        <p class="c845 Qomolangma title-item">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
-        <p class="c845 FZLTTHJWBOLD">
+        <p class="c845 title-item">{{ lang == 'zh' ? item.name : item.nameTibetan }}</p>
+        <p class="c845 FZLTTHJWF">
           <span class="f20">￥</span>
           <span class="f36">{{ item.price }}</span>
         </p>
-        <p class="c845 Qomolangma tip f22">{{ lang == 'zh' ? item.intro : item.introTibetan }}</p>
+        <p class="c845 tip f22">{{ lang == 'zh' ? item.intro : item.introTibetan }}</p>
       </div>
     </div>
-    <!-- <p class="title f32 c333 Qomolangma">རྒྱུན་མི།</p>
-    <div class="f13 c333 Qomolangma rule" v-html="VipExplain"></div>-->
+    <!-- <p class="title f32 c333">རྒྱུན་མི།</p>
+    <div class="f13 c333 rule" v-html="VipExplain"></div>-->
 
     <div class="fixedbottom flex area-center" @click="openpay" :style="{ bottom: tabbarHeight }">
       <div class="button-bottom bglinear">
-        <span class="c333 f32 Qomolangma">{{ $t('kaitong') }}</span>
+        <span class="c333 f32">{{ $t('kaitong') }}</span>
       </div>
     </div>
   </div>
@@ -227,12 +227,12 @@ export default defineComponent({
       flex-direction: column;
       margin: 15px 0 0;
       border-radius: 6px;
-      .title-item {
-        margin-bottom: 8px;
-      }
-      .tip {
-        margin-top: 20px;
-      }
+      // .title-item {
+      //   margin-bottom: 8px;
+      // }
+      // .tip {
+      //   margin-top: 20px;
+      // }
     }
     .choosed {
       border: 2px solid #ed9b23;
