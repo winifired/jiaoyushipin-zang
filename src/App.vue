@@ -65,14 +65,13 @@ export default {
 @font-face {
   // 苹方-简
   font-family: "pingfang";
-  src: url('./assets/font/pingfang.TTF') format("truetype");
-  // src: url('./assets/font/PINGFANG\ MEDIUM_1.TTF') format("truetype");
+  src: url('./assets/font/NOTOSANSHANS-MEDIUM_0.OTF') format("truetype");
 }
 
 @font-face {
   // 方正兰亭特黑简体
   font-family: "FZLTTHJW";
-  src: url("./assets/font/FZLTTHJW.TTF") format("truetype");
+  src: url("./assets/font/FZLTTHJW.ttf") format("truetype");
 }
 
 @font-face {
