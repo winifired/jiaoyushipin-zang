@@ -1,14 +1,14 @@
 <template>
   <div class="index">
     <div class="swper-search">
-      <div class="search flex area-between">
+      <div class="search">
          <!-- :class="$i18n.locale == 'zh'?'bold':''"  -->
         <p class="toggle" @click="toggleLang" :class="$i18n.locale != 'zh'?'bold':''">{{ $t('lang.language') }}</p>
         <div class="flex row-center search-input" @click="$router.push('/search')">
           <img src="../assets/search-icon.png" alt class="icon40" />
           <input type="text" readonly :value="$t('home.sou')" class="f26 caaa" />
         </div>
-        <Badge :content="state.unReadNum" max="99" :show-zero="false">
+        <Badge :content="state.unReadNum" max="99" :show-zero="false" class="flex row-center column-end">
           <img
             src="../assets/msg-icon.png"
             alt
@@ -233,10 +233,11 @@ function toggleLang() {
 .search {
   padding: 8px 16px;
   position: relative;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 40px 1fr 30px;
   z-index: 2;
   &-input {
-    flex: 1;
-    margin-right: 16px;
     height: 32px;
     background: #ffffff;
     border-radius: 16px;
@@ -245,7 +246,7 @@ function toggleLang() {
       margin-right: 12px;
     }
     input {
-      flex: 1;
+      width:70%;
     }
   }
 }
@@ -257,6 +258,5 @@ function toggleLang() {
   font-size: 14px;
   text-align: center;
   border-radius: 50%;
-  margin-right: 12px;
 }
 </style>
