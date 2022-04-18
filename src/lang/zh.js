@@ -2,6 +2,10 @@ export default {
   lang: {
     language: 'བོད'
   },
+  saw:'观看提示',
+  saw2:'购买后观看完整的视频教程',
+  saw3:'取消',
+  saw4:'去购买',
   phoneerror:'手机号错误',
   sc:'收藏',
   xxjl:'学习记录',
@@ -35,7 +39,7 @@ export default {
   yigoumai:'已购买',
   jiaruxuexi:'加入学习',
   lijidingyue:'立即订阅',
-  detailname: '课程详情',
+  detailname: '内容介绍',
   detailmulu: '目录',
   detaileva: '留言评价',
   freesaw: '购买后观看完整的视频教程',
@@ -49,11 +53,11 @@ export default {
   nicheng: '用户昵称',
   loginname: '立即登录',
   appname: '藏童',
-  kechengxingshi: '课程形式',
+  kechengxingshi: '类型',
   jiage: '价格',
   all: '全部',
-  dancikc: '单次课程',
-  morekecheng: '系列课程',
+  dancikc: '单次',
+  morekecheng: '系列',
   fufei: '付费',
   tabbar: {
     index: '首页',
@@ -70,9 +74,9 @@ export default {
     signout: '退出登录'
   },
   home: {
-    selected: '精选课程',
-    newest: '最新课程',
-    free: '免费课程',
+    selected: '热门推荐',
+    newest: '新品专区',
+    free: '免费专区',
     see: '查看更多',
     sou: '搜索您感兴趣的内容'
   },

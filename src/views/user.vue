@@ -9,7 +9,7 @@
                     v-if="userid && userinfo && userinfo.avatar"
                 />
                 <img src="../assets/avatar.png" alt class="avatar" v-else />
-                <p v-if="userid" class="flex usernick row-center">
+                <p v-if="userid" class="flex usernick">
                     {{ userinfo.nickName || $t('nicheng') }}
                     <img
                         src="../assets/vip-user.png"
