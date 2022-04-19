@@ -8,7 +8,8 @@
           <img src="../assets/search-icon.png" alt class="icon40" />
           <input type="text" readonly :value="$t('home.sou')" class="f26 caaa" />
         </div>
-        <Badge :content="state.unReadNum" max="99" :show-zero="false" class="flex row-center column-end">
+        <div class="flex row-center column-end">
+          <Badge :content="state.unReadNum" max="99" :show-zero="false" class="icon44">
           <img
             src="../assets/msg-icon.png"
             alt
@@ -16,6 +17,7 @@
             @click="$store.state.userid ? $router.push('/systemMsg') : $router.push('/login')"
           />
         </Badge>
+        </div>
       </div>
       <Swipe class="my-swipe" :show-indicators="false" :loop="true" :autoplay="3000">
         <SwipeItem v-for="item in state.swiper" :key="item.id">
@@ -83,7 +85,7 @@
 <script setup>
 import { Badge, Swipe, SwipeItem } from "vant";
 import listshow from "@/components/list.vue";
-import { getCurrentInstance, reactive, watch } from "vue";
+import { getCurrentInstance, reactive, watch,onMounted } from "vue";
 import { useStore } from "vuex";
 import { getwxConfig } from "../utils/wxJs.js";
 import { useI18n } from "vue-i18n";
@@ -93,7 +95,10 @@ document.title = t("appname");
 const { proxy } = getCurrentInstance();
 const store = useStore();
 // 消息未读数量
-store.dispatch("getUnReadNum");
+onMounted(() => {
+  store.dispatch("getUnReadNum");
+});
+
 const state = reactive({
   swiper: [],
   unReadNum: store.state.UnReadNum,
@@ -107,6 +112,12 @@ watch(
   () => locale.value,
   (newData) => {
     state.lang = newData;
+  }
+);
+watch(
+  () => store.state.UnReadNum,
+  (newData) => {
+    state.unReadNum = newData;
   }
 );
 proxy.$post(proxy.Apis.selectJyspCarouselList).then((res) => {

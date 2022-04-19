@@ -6,6 +6,7 @@
                 <img src="../assets/user-icon.png" alt class="icon40" />
             </div>
             <input
+                style="width: 80%;"
                 type="text"
                 :placeholder="$t('login.phoneplace')"
                 class="f30"
@@ -16,10 +17,11 @@
         </div>
         <div class="flex row-center login-input nowarp">
             <input
+
                 type="text"
                 :placeholder="$t('login.yanzheng')"
                 class="f30"
-                style="padding:0;"
+                style="padding:0;width:40%"
                 v-model="codeVal"
                 @focus="getFocus"
                 @blur="getBlur"

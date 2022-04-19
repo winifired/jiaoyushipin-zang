@@ -5,6 +5,7 @@
                 <img src="../assets/register-user-icon.png" alt class="icon40" />
             </div>
             <input
+                style="width: 80%;"
                 type="text"
                 :placeholder="$t('login.phoneplace')"
                 class="f30"
@@ -17,7 +18,7 @@
                 type="text"
                 :placeholder="$t('login.yanzheng')"
                 class="f30"
-                style="padding:0;"
+                style="padding:0;width: 40%;"
                 v-model="state.codeVal"
             />
             <button

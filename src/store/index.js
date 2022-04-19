@@ -45,6 +45,7 @@ export default createStore({
                 post(Apis.countUserUnReadMessage, {
                     userId: state.userid
                 }).then(res => {
+                    console.log(res)
                     commit('setUnReadNum', res.data)
                 })
             }
