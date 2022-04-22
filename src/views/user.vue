@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <div class="user-vip flex">
-            <div class="c845 f30 flex">
+            <div class="c845 f30 flex" @click="userid?$router.push('/userMsg'):$router.push('/login')">
                 <img
                     :src="userinfo.avatar"
                     alt
@@ -22,7 +22,6 @@
                 <p
                     class="c845 f30 usernick"
                     v-else
-                    @click="$router.push('/login')"
                 >{{ $t('loginname') }}</p>
             </div>
             <div class="flex uservip">
